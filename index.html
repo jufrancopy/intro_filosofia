@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filosofía del Arte y la Música</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 0;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-style: italic;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .period {
+            background: rgba(255, 255, 255, 0.95);
+            margin: 30px 0;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .period:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .period-header {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 25px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .period-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .period-header:hover::before {
+            left: 100%;
+        }
+
+        .period-title {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .period-dates {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .toggle-icon {
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .period-content {
+            padding: 30px;
+            display: none;
+            animation: slideDown 0.5s ease;
+        }
+
+        .period-content.active {
+            display: block;
+        }
+
+        .philosophers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .philosopher {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #ee5a24;
+            transition: all 0.3s ease;
+        }
+
+        .philosopher:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .philosopher h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .music-note {
+            color: #e74c3c;
+            margin-right: 8px;
+        }
+
+        .quiz-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .quiz-title {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .question {
+            margin: 20px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #3498db;
+        }
+
+        .options {
+            margin: 15px 0;
+        }
+
+        .option {
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            background: white;
+            border: 2px solid #ecf0f1;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .option:hover {
+            border-color: #3498db;
+            background: #ebf3fd;
+        }
+
+        .option.selected {
+            border-color: #2ecc71;
+            background: #d5f4e6;
+        }
+
+        .option.incorrect {
+            border-color: #e74c3c;
+            background: #fadbd8;
+        }
+
+        .quiz-button {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 20px auto;
+        }
+
+        .quiz-button:hover {
+            background: linear-gradient(135deg, #2980b9, #1f618d);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .score {
+            text-align: center;
+            font-size: 1.3rem;
+            color: #2c3e50;
+            margin: 20px 0;
+            padding: 15px;
+            background: #e8f6f3;
+            border-radius: 10px;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                max-height: 0;
+            }
+            to {
+                opacity: 1;
+                max-height: 2000px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .period-title {
+                font-size: 1.5rem;
+            }
+            
+            .philosophers {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+        }
+
+        .floating-note {
+            position: fixed;
+            color: rgba(238, 90, 36, 0.3);
+            font-size: 2rem;
+            animation: float 6s ease-in-out infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-note" style="top: 10%; left: 5%;">♪</div>
+    <div class="floating-note" style="top: 20%; right: 10%; animation-delay: -2s;">♫</div>
+    <div class="floating-note" style="bottom: 30%; left: 15%; animation-delay: -4s;">♪</div>
+
+    <div class="container">
+        <header>
+            <h1>Filosofía del Arte y la Música</h1>
+            <p class="subtitle">Un viaje a través del pensamiento estético desde la Antigüedad hasta nuestros días</p>
+        </header>
+
+        <div class="period" data-period="ancient">
+            <div class="period-header" onclick="togglePeriod('ancient')">
+                <div class="period-title">
+                    Filosofía Antigua
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="period-dates">800 a.C. - 500 d.C.</div>
+            </div>
+            <div class="period-content" id="ancient-content">
+                <div class="philosophers">
+                    <div class="philosopher">
+                        <h4>Platón (428-348 a.C.)</h4>
+                        <p>Desarrolló la teoría de la mimesis, considerando el arte como una imitación de imitaciones. <span class="music-note">♪</span> Creía que la música tenía poder educativo y moral, capaz de formar el carácter del alma. En "La República", propuso modos musicales específicos para la educación de los guardianes.</p>
+                    </div>
+                    <div class="philosopher">
+                        <h4>Aristóteles (384-322 a.C.)</h4>
+                        <p>En su "Poética", defendió el arte como catarsis emocional. <span class="music-note">♫</span> Consideraba la música como la más imitativa de las artes, capaz de representar directamente los estados del alma y las emociones humanas a través del ritmo y la melodía.</p>
+                    </div>
+                    <div class="philosopher">
+                        <h4>Plotino (205-270 d.C.)</h4>
+                        <p>Renovó la estética platónica, viendo la belleza como emanación del Uno. El arte no imita lo sensible, sino que revela la forma inteligible. <span class="music-note">♪</span> La música, por su naturaleza matemática, acerca el alma a la armonía universal.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="period" data-period="medieval">
+            <div class="period-header" onclick="togglePeriod('medieval')">
+                <div class="period-title">
+                    Filosofía Medieval
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="period-dates">500 - 1400 d.C.</div>
+            </div>
+            <div class="period-content" id="medieval-content">
+                <div class="philosophers">
+                    <div class="philosopher">
+                        <h4>San Agustín (354-430)</h4>
+                        <p>Integró la belleza platónica con la teología cristiana. <span class="music-note">♪</span> En "De Musica", exploró la música como ciencia matemática que eleva el alma hacia Dios. La belleza terrena es reflejo de la belleza divina.</p>
+                    </div>
+                    <div class="philosopher">
+                        <h4>Santo Tomás de Aquino (1225-1274)</h4>
+                        <p>Definió la belleza con tres condiciones: integridad, proporción y claridad. <span class="music-note">♫</span> Veía en la música sacra un medio de contemplación divina, donde la armonía sonora refleja el orden cósmico establecido por Dios.</p>
+                    </div>
+                    <div class="philosopher">
+                        <h4>Pseudo-Dionisio Areopagita (s. VI)</h4>
+                        <p>Desarrolló una estética de la luz como símbolo de lo divino. El arte gótico se inspiró en sus ideas sobre la belleza como vía de ascensión espiritual.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="period" data-period="renaissance">
+            <div class="period-header" onclick="togglePeriod('renaissance')">
+                <div class="period-title">
+                    Renacimiento
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="period-dates">1400 - 1600</div>
+            </div>
+            <div class="period-content" id="renaissance-content">
+                <div class="philosophers">
+                    <div class="philosopher">
+                        <h4>León Battista Alberti (1404-1472)</h4>
+                        <p>Sistematizó las reglas de la perspectiva y proporción en el arte. <span class="music-note">♪</span> Aplicó principios matemáticos tanto a la arquitectura como a la música, buscando la armonía perfecta basada en ratios numéricos.</p>
+                    </div>
+                    <div class="philosopher">
+                        <h4>Marsilio Ficino (1433-1499)</h4>
+                        <p>Renovó el platonismo, viendo el arte como vía de conocimiento de las Ideas. <span class="music-note">♫</span> Consideraba la música como magia natural que puede influir en el alma y curar enfermedades a través de la correspondencia cósmica.</p>
+                    </div>
+                    <div class="philosopher">
+                        <h4>Giorgio Vasari (1511-1574)</h4>
+                        <p>Estableció la historia del arte como disciplina, creando el concepto de "Bellas Artes". Defendió la superioridad del disegno italiano y la evolución progresiva del arte hacia la perfección.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="period" data-period="modern">
+            <div class="period-header" onclick="togglePeriod('modern')">
+                <div class="period-title">
+                    Filosofía Moderna
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="period-dates">1600 - 1800</div>
+            </div>
+            <div class="period-content" id="modern-content">
+                <div class="philosophers">
+                    <div class="philosopher">
+                        <h4>Immanuel Kant (1724-1804)</h4>
+                        <p>Revolucionó la estética con su "Crítica del Juicio". Definió la belleza como "finalidad sin fin" y estableció el juicio estético como universal pero subjetivo. <span class="music-note">♪</span> La música, siendo la más directa de las artes, expresa lo inefable sin conceptos.</p>
+                    </div>
+                    <div class="philosopher">
+                        <h4>Gottfried Leibniz (1646-1716)</h4>
+                        <p>Definió la música como "ejercicio aritmético secreto del alma". <span class="music-note">♫</span> Veía en la armonía musical un reflejo de la armonía preestablecida del universo, donde cada mónada refleja la totalidad.</p>
+                    </div>
+                    <div class="philosopher">
+                        <h4>David Hume (1711-1776)</h4>
+                        <p>Desarrolló una estética empirista basada en el sentimiento. El gusto se forma por la experiencia y puede educarse. La crítica artística requiere delicadeza de gusto y amplitud de experiencia.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="period" data-period="romantic">
+            <div class="period-header" onclick="togglePeriod('romantic')">
+                <div class="period-title">
+                    Romanticismo e Idealismo
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="period-dates">1800 - 1900</div>
+            </div>
+            <div class="period-content" id="romantic-content">
+                <div class="philosophers">
+                    <div class="philosopher">
+                        <h4>G.W.F. Hegel (1770-1831)</h4>
+                        <p>Concibió el arte como manifestación sensible de la Idea Absoluta. <span class="music-note">♪</span> La música es el arte romántico por excelencia, expresando la interioridad pura del sentimiento sin recurrir a lo espacial o conceptual.</p>
+                    </div>
+                    <div class="philosopher">
+                        <h4>Arthur Schopenhauer (1788-1860)</h4>
+                        <p>El arte libera temporalmente del sufrimiento de la Voluntad. <span class="music-note">♫</span> La música es especial: no representa las Ideas como otras artes, sino que es copia directa de la Voluntad misma, por eso nos conmueve tan profundamente.</p>
+                    </div>
+                    <div class="philosopher">
+                        <h4>Friedrich Schelling (1775-1854)</h4>
+                        <p>El arte es "órgano de la filosofía", donde se reconcilian lo consciente e inconsciente. <span class="music-note">♪</span> En la música, el tiempo se hace audible como forma pura del movimiento interior del alma.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="period" data-period="contemporary">
+            <div class="period-header" onclick="togglePeriod('contemporary')">
+                <div class="period-title">
+                    Filosofía Contemporánea
+                    <span class="toggle-icon">▼</span>
+                </div>
+                <div class="period-dates">1900 - Presente</div>
+            </div>
+            <div class="period-content" id="contemporary-content">
+                <div class="philosophers">
+                    <div class="philosopher">
+                        <h4>Walter Benjamin (1892-1940)</h4>
+                        <p>Analizó la pérdida del "aura" en la época de reproducibilidad técnica. <span class="music-note">♪</span> La grabación musical democratiza el acceso pero transforma la experiencia estética, perdiendo la unicidad del evento sonoro.</p>
+                    </div>
+                    <div class="philosopher">
+                        <h4>Theodor Adorno (1903-1969)</h4>
+                        <p>Crítico de la industria cultural, defendió el arte auténtico como resistencia. <span class="music-note">♫</span> La música atonal de Schoenberg revela la verdad del mundo fragmentado moderno, mientras que el jazz es manipulación ideológica.</p>
+                    </div>
+                    <div class="philosopher">
+                        <h4>Martin Heidegger (1889-1976)</h4>
+                        <p>El arte desoculta la verdad del Ser. <span class="music-note">♪</span> La música, especialmente en Hölderlin, habita poéticamente el mundo, revelando la dimensión temporal del Dasein como escucha primordial.</p>
+                    </div>
+                    <div class="philosopher">
+                        <h4>Jacques Derrida (1930-2004)</h4>
+                        <p>Deconstruyó las oposiciones tradicionales arte/no-arte. <span class="music-note">♫</span> La música, como escritura sonora, es pura diferencia y diferancia, cuestionando la presencia plena del significado.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="quiz-section">
+            <h3 class="quiz-title">Autoevaluación por Períodos</h3>
+            <div id="quiz-container"></div>
+            <button class="quiz-button" onclick="generateQuiz()">Generar Nueva Evaluación</button>
+            <div id="score-display" class="score" style="display: none;"></div>
+        </div>
+    </div>
+
+    <script>
+        const questions = {
+            ancient: [
+                {
+                    question: "¿Qué filósofo definió el arte como 'mimesis' o imitación?",
+                    options: ["Aristóteles", "Platón", "Plotino", "Sócrates"],
+                    correct: 1
+                },
+                {
+                    question: "Según Aristóteles, ¿qué función cumple el arte?",
+                    options: ["Decorativa", "Catarsis emocional", "Educativa solamente", "Religiosa"],
+                    correct: 1
+                }
+            ],
+            medieval: [
+                {
+                    question: "¿Quién escribió 'De Musica' explorando la música como ciencia matemática?",
+                    options: ["Santo Tomás", "San Agustín", "San Ambrosio", "San Jerónimo"],
+                    correct: 1
+                },
+                {
+                    question: "Las tres condiciones de la belleza según Tomás de Aquino son:",
+                    options: ["Forma, materia, esencia", "Integridad, proporción, claridad", "Unidad, verdad, bondad", "Armonía, ritmo, melodía"],
+                    correct: 1
+                }
+            ],
+            renaissance: [
+                {
+                    question: "¿Quién sistematizó las reglas de perspectiva en el Renacimiento?",
+                    options: ["Vasari", "Ficino", "Alberti", "Brunelleschi"],
+                    correct: 2
+                },
+                {
+                    question: "Marsilio Ficino consideraba la música como:",
+                    options: ["Arte menor", "Magia natural", "Ciencia pura", "Entretenimiento"],
+                    correct: 1
+                }
+            ],
+            modern: [
+                {
+                    question: "Kant definió la belleza como:",
+                    options: ["Imitación perfecta", "Finalidad sin fin", "Placer sensible", "Armonía matemática"],
+                    correct: 1
+                },
+                {
+                    question: "Para Leibniz, la música es:",
+                    options: ["Arte emocional", "Ejercicio aritmético secreto del alma", "Imitación de la naturaleza", "Expresión religiosa"],
+                    correct: 1
+                }
+            ],
+            romantic: [
+                {
+                    question: "¿Qué filósofo consideró la música como copia directa de la Voluntad?",
+                    options: ["Hegel", "Schelling", "Schopenhauer", "Fichte"],
+                    correct: 2
+                },
+                {
+                    question: "Para Hegel, el arte es:",
+                    options: ["Manifestación sensible de la Idea", "Expresión del sentimiento", "Imitación de lo bello", "Juego libre"],
+                    correct: 0
+                }
+            ],
+            contemporary: [
+                {
+                    question: "Walter Benjamin habló de la pérdida del 'aura' en:",
+                    options: ["El arte clásico", "La época de reproducibilidad técnica", "El arte abstracto", "La música popular"],
+                    correct: 1
+                },
+                {
+                    question: "¿Quién fue crítico de la industria cultural?",
+                    options: ["Benjamin", "Adorno", "Heidegger", "Derrida"],
+                    correct: 1
+                }
+            ]
+        };
+
+        function togglePeriod(period) {
+            const content = document.getElementById(period + '-content');
+            const icon = document.querySelector(`[data-period="${period}"] .toggle-icon`);
+            
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                icon.textContent = '▼';
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                // Close all other periods
+                document.querySelectorAll('.period-content').forEach(c => c.classList.remove('active'));
+                document.querySelectorAll('.toggle-icon').forEach(i => {
+                    i.textContent = '▼';
+                    i.style.transform = 'rotate(0deg)';
+                });
+                
+                content.classList.add('active');
+                icon.textContent = '▲';
+                icon.style.transform = 'rotate(180deg)';
+            }
+        }
+
+        function generateQuiz() {
+            const container = document.getElementById('quiz-container');
+            const periods = Object.keys(questions);
+            let quizHTML = '';
+            let questionIndex = 0;
+
+            periods.forEach(period => {
+                const periodQuestions = questions[period];
+                const randomQuestion = periodQuestions[Math.floor(Math.random() * periodQuestions.length)];
+                
+                quizHTML += `
+                    <div class="question" data-period="${period}" data-correct="${randomQuestion.correct}" data-index="${questionIndex}">
+                        <h4>Período: ${getPeriodName(period)}</h4>
+                        <p><strong>${randomQuestion.question}</strong></p>
+                        <div class="options">
+                            ${randomQuestion.options.map((option, i) => 
+                                `<label class="option" data-value="${i}">
+                                    <input type="radio" name="q${questionIndex}" value="${i}" style="margin-right: 10px;">
+                                    ${option}
+                                </label>`
+                            ).join('')}
+                        </div>
+                    </div>
+                `;
+                questionIndex++;
+            });
+
+            quizHTML += '<button class="quiz-button" onclick="checkAnswers()">Verificar Respuestas</button>';
+            container.innerHTML = quizHTML;
+
+            // Add click handlers for options
+            document.querySelectorAll('.option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const radio = this.querySelector('input[type="radio"]');
+                    radio.checked = true;
+                    
+                    // Remove selected class from siblings
+                    this.parentNode.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+                    this.classList.add('selected');
+                });
+            });
+
+            document.getElementById('score-display').style.display = 'none';
+        }
+
+        function checkAnswers() {
+            let correct = 0;
+            let total = 0;
+
+            document.querySelectorAll('.question').forEach(question => {
+                const correctAnswer = parseInt(question.dataset.correct);
+                const selectedRadio = question.querySelector('input[type="radio"]:checked');
+                
+                if (selectedRadio) {
+                    const selectedValue = parseInt(selectedRadio.value);
+                    const selectedOption = selectedRadio.closest('.option');
+                    
+                    if (selectedValue === correctAnswer) {
+                        correct++;
+                        selectedOption.style.borderColor = '#2ecc71';
+                        selectedOption.style.backgroundColor = '#d5f4e6';
+                    } else {
+                        selectedOption.classList.add('incorrect');
+                    }
+                }
+                total++;
+            });
+
+            const percentage = Math.round((correct / total) * 100);
+            const scoreDisplay = document.getElementById('score-display');
+            scoreDisplay.innerHTML = `
+                <h3>Resultado de la Evaluación</h3>
+                <p>Has respondido correctamente ${correct} de ${total} preguntas</p>
+                <p><strong>Puntuación: ${percentage}%</strong></p>
+                <p>${getScoreMessage(percentage)}</p>
+            `;
+            scoreDisplay.style.display = 'block';
+        }
+
+        function getPeriodName(period) {
+            const names = {
+                ancient: 'Filosofía Antigua',
+                medieval: 'Filosofía Medieval', 
+                renaissance: 'Renacimiento',
+                modern: 'Filosofía Moderna',
+                romantic: 'Romanticismo e Idealismo',
+                contemporary: 'Filosofía Contemporánea'
+            };
+            return names[period];
+        }
+
+        function getScoreMessage(percentage) {
+            if (percentage >= 90) return "¡Excelente! Tienes un dominio excepcional de la filosofía del arte.";
+            if (percentage >= 70) return "¡Muy bien! Demuestras un buen conocimiento del tema.";
+            if (percentage >= 50) return "Bien. Tienes una base sólida, pero podrías profundizar más.";
+            return "Te recomendamos revisar los contenidos y intentar de nuevo.";
+        }
+
+        // Initialize with first quiz
+        generateQuiz();
+
+        // Add floating animations
+        setInterval(() => {
+            const notes = document.querySelectorAll('.floating-note');
+            notes.forEach(note => {
+                note.style.left = Math.random() * 90 + '%';
+                note.style.top = Math.random() * 90 + '%';
+            });
+        }, 10000);
+    </script>
+</body>
+</html>
