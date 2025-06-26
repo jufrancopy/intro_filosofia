@@ -432,6 +432,64 @@
             0%, 100% { transform: translateY(0) rotate(0deg); }
             50% { transform: translateY(-30px) rotate(180deg); }
         }
+
+        /* Botón flotante para volver al home */
+        .floating-home-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            border: none;
+            cursor: pointer;
+        }
+
+        .floating-home-btn:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+            background: linear-gradient(135deg, #5a67d8, #667eea);
+        }
+
+        .floating-home-btn:active {
+            transform: translateY(-2px) scale(1.05);
+        }
+
+        .floating-home-btn::before {
+            content: '🏠';
+            font-size: 1.3rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Responsive para móviles */
+        @media (max-width: 768px) {
+            .floating-home-btn {
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+            
+            .floating-home-btn::before {
+                font-size: 1.1rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -903,6 +961,7 @@
                 estos pensadores desarrollaron conceptos que siguen influyendo en nuestra apreciación estética contemporánea.
             </p>
         </footer>
+        <a href="index.html" class="floating-home-btn" title="Volver al inicio"></a>
     </div>
 
     <script>

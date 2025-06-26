@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Filosofía Medieval del Arte y la Música</title>
+    <title>Filosofía Medieval de la Música</title>
     <style>
         * {
             margin: 0;
@@ -14,666 +14,615 @@
         body {
             font-family: 'Georgia', serif;
             line-height: 1.6;
-            background: linear-gradient(135deg, #8B4513 0%, #CD853F 30%, #F4A460 100%);
+            color: #2c3e50;
+            background: linear-gradient(135deg, #8B4513 0%, #DAA520 50%, #2F4F4F 100%);
             min-height: 100vh;
-            color: #2C1810;
-        }
-
-        .parchment-bg {
-            background: linear-gradient(45deg, #F5E6D3 0%, #E8D5B7 100%);
-            min-height: 100vh;
-            position: relative;
-            overflow-x: hidden;
-        }
-
-        .parchment-bg::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: 
-                radial-gradient(circle at 20% 20%, rgba(139, 69, 19, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(160, 82, 45, 0.1) 0%, transparent 50%);
-            pointer-events: none;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 20px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .illuminated-letter {
-            float: left;
-            font-size: 4rem;
-            font-weight: bold;
-            color: #8B0000;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            margin: 0 10px 0 0;
-            line-height: 3rem;
-            font-family: 'serif';
         }
 
         header {
-            text-align: center;
-            padding: 40px 0;
-            background: rgba(139, 69, 19, 0.1);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             border-radius: 20px;
+            padding: 50px;
             margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            border: 3px solid #8B4513;
-            position: relative;
-        }
-
-        header::before {
-            content: '✠';
-            position: absolute;
-            top: 10px;
-            left: 20px;
-            font-size: 2rem;
-            color: #8B0000;
-        }
-
-        header::after {
-            content: '✠';
-            position: absolute;
-            top: 10px;
-            right: 20px;
-            font-size: 2rem;
-            color: #8B0000;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            animation: fadeInDown 1s ease-out;
+            border: 3px solid #DAA520;
         }
 
         h1 {
-            font-size: 2.8rem;
-            color: #8B0000;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-size: 3.5em;
+            color: #2c3e50;
             margin-bottom: 15px;
-            font-family: 'Georgia', serif;
+            background: linear-gradient(45deg, #8B4513, #DAA520, #2F4F4F);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .period {
+            font-size: 1.8em;
+            color: #8B4513;
+            font-weight: bold;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
         }
 
         .subtitle {
-            font-size: 1.2rem;
-            color: #8B4513;
+            font-size: 1.3em;
+            color: #556B2F;
             font-style: italic;
-            margin-bottom: 10px;
-        }
-
-        .period-dates {
-            font-size: 1.1rem;
-            color: #654321;
-            font-weight: bold;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         .intro-section {
             background: rgba(255, 255, 255, 0.9);
-            padding: 30px;
-            border-radius: 15px;
-            margin: 30px 0;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            border: 2px solid #D2B48C;
-            position: relative;
-        }
-
-        .intro-section::before {
-            content: '§';
-            position: absolute;
-            top: -15px;
-            left: 30px;
-            background: #8B4513;
-            color: white;
-            padding: 5px 15px;
+            backdrop-filter: blur(15px);
             border-radius: 20px;
-            font-size: 1.2rem;
-            font-weight: bold;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border-left: 6px solid #DAA520;
         }
 
-        .philosophers-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin: 40px 0;
+        .philosopher-section {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            padding: 40px;
+            margin-bottom: 35px;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.12);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeInUp 1s ease-out;
+            border: 2px solid transparent;
+            background-clip: padding-box;
         }
 
-        .philosopher-card {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            border: 3px solid #D2B48C;
-            position: relative;
-            transition: all 0.3s ease;
-            overflow: hidden;
+        .philosopher-section:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.18);
         }
 
-        .philosopher-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, #8B0000, #CD853F, #8B0000);
+        .philosopher-section.agustin {
+            border-left: 8px solid #DC143C;
         }
 
-        .philosopher-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+        .philosopher-section.tomas {
+            border-left: 8px solid #4169E1;
+        }
+
+        .philosopher-section.dionisio {
+            border-left: 8px solid #FFD700;
+        }
+
+        .philosopher-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f1f2f6;
         }
 
         .philosopher-name {
-            font-size: 1.8rem;
-            color: #8B0000;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            font-size: 2.2em;
+            color: #2c3e50;
+            margin-right: 15px;
+            font-weight: bold;
         }
 
         .philosopher-dates {
-            font-size: 1rem;
+            font-size: 1.1em;
             color: #8B4513;
-            font-style: italic;
+            background: rgba(139, 69, 19, 0.1);
+            padding: 8px 15px;
+            border-radius: 25px;
+            font-weight: 600;
+        }
+
+        .music-symbol {
+            font-size: 1.5em;
+            margin: 0 10px;
+            color: #DAA520;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin: 25px 0;
+        }
+
+        .concept-box {
+            background: linear-gradient(135deg, rgba(218, 165, 32, 0.1), rgba(139, 69, 19, 0.1));
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 4px solid #DAA520;
+            transition: transform 0.2s ease;
+        }
+
+        .concept-box:hover {
+            transform: translateX(5px);
+        }
+
+        .concept-title {
+            font-size: 1.3em;
+            color: #8B4513;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .major-work {
+            background: linear-gradient(135deg, #2F4F4F, #556B2F);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin: 25px 0;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .work-title {
+            font-size: 1.6em;
+            font-weight: bold;
             margin-bottom: 15px;
+            text-align: center;
         }
 
-        .philosopher-content {
-            line-height: 1.7;
-            color: #2C1810;
-        }
-
-        .key-concept {
-            background: linear-gradient(135deg, #FFE4B5, #F5DEB3);
-            padding: 15px;
-            border-radius: 10px;
-            margin: 15px 0;
-            border-left: 5px solid #8B4513;
+        .quote-box {
+            background: rgba(255, 248, 220, 0.9);
+            border: 2px solid #DAA520;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            font-style: italic;
+            font-size: 1.1em;
             position: relative;
         }
 
-        .key-concept::before {
-            content: '💡';
+        .quote-box::before {
+            content: '"';
+            font-size: 4em;
+            color: #DAA520;
             position: absolute;
             top: -10px;
             left: 15px;
-            background: #8B4513;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-size: 0.9rem;
+            line-height: 1;
         }
 
-        .key-concept h4 {
-            color: #8B0000;
-            margin-bottom: 8px;
-            font-size: 1.1rem;
-        }
-
-        .music-quote {
-            background: rgba(139, 0, 0, 0.1);
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-            border-left: 4px solid #8B0000;
-            font-style: italic;
-            position: relative;
-        }
-
-        .music-quote::before {
-            content: '♪';
-            position: absolute;
-            top: -10px;
-            left: 20px;
-            background: #8B0000;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 50%;
-            font-size: 1rem;
+        .influence-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 35px;
+            margin: 30px 0;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border: 3px solid #8B4513;
         }
 
         .timeline {
             background: rgba(255, 255, 255, 0.9);
-            padding: 30px;
-            border-radius: 15px;
-            margin: 40px 0;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            border: 2px solid #D2B48C;
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 35px;
+            margin: 30px 0;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
         }
 
         .timeline-item {
-            display: flex;
-            align-items: center;
-            margin: 20px 0;
-            padding: 15px;
-            background: rgba(245, 222, 179, 0.3);
-            border-radius: 10px;
-            border-left: 4px solid #8B4513;
-        }
-
-        .timeline-date {
-            font-weight: bold;
-            color: #8B0000;
-            min-width: 100px;
-            margin-right: 20px;
-        }
-
-        .interactive-section {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 30px;
-            border-radius: 15px;
-            margin: 30px 0;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            border: 2px solid #D2B48C;
-        }
-
-        .concept-card {
-            background: linear-gradient(135deg, #F5E6D3, #E8D5B7);
-            padding: 20px;
-            border-radius: 10px;
-            margin: 15px 0;
-            border: 2px solid #D2B48C;
-            cursor: pointer;
-            transition: all 0.3s ease;
             position: relative;
+            padding-left: 40px;
+            margin-bottom: 30px;
+            border-left: 4px solid #DAA520;
         }
 
-        .concept-card:hover {
-            transform: scale(1.02);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 5px;
+            width: 18px;
+            height: 18px;
+            background: #DAA520;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(218, 165, 32, 0.5);
         }
 
-        .concept-card.active {
-            background: linear-gradient(135deg, #FFE4B5, #F5DEB3);
-            border-color: #8B4513;
-        }
-
-        .concept-explanation {
-            display: none;
-            margin-top: 15px;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 8px;
-            border-left: 4px solid #8B0000;
-        }
-
-        .concept-explanation.active {
-            display: block;
-            animation: slideDown 0.5s ease;
-        }
-
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .comparison-table th {
-            background: #8B4513;
-            color: white;
-            padding: 15px;
-            text-align: left;
+        .century {
             font-weight: bold;
+            color: #8B4513;
+            font-size: 1.3em;
+            margin-bottom: 10px;
         }
 
-        .comparison-table td {
-            padding: 15px;
-            border-bottom: 1px solid #D2B48C;
+        .legacy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
         }
 
-        .comparison-table tr:nth-child(even) {
-            background: rgba(245, 222, 179, 0.3);
+        .legacy-card {
+            background: linear-gradient(135deg, rgba(139, 69, 19, 0.1), rgba(218, 165, 32, 0.1));
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            border: 2px solid transparent;
         }
 
-        .floating-cross {
-            position: fixed;
-            color: rgba(139, 0, 0, 0.2);
-            font-size: 2rem;
-            animation: float 8s ease-in-out infinite;
-            pointer-events: none;
-            z-index: 0;
+        .legacy-card:hover {
+            transform: scale(1.05);
+            border-color: #DAA520;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.2; }
-            50% { transform: translateY(-30px) rotate(180deg); opacity: 0.4; }
+        .legacy-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+            display: block;
         }
 
-        @keyframes slideDown {
+        footer {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border: 3px solid #2F4F4F;
+            margin-top: 40px;
+        }
+
+        @keyframes fadeInDown {
             from {
                 opacity: 0;
-                max-height: 0;
-                transform: translateY(-10px);
+                transform: translateY(-30px);
             }
             to {
                 opacity: 1;
-                max-height: 200px;
                 transform: translateY(0);
             }
         }
 
-        .highlight {
-            background: linear-gradient(120deg, #FFE4B5 0%, #F5DEB3 100%);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-weight: bold;
-            color: #8B0000;
-        }
-
-        .section-title {
-            font-size: 2.2rem;
-            color: #8B0000;
-            text-align: center;
-            margin: 40px 0 20px 0;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background: linear-gradient(90deg, #8B0000, #CD853F, #8B0000);
-            border-radius: 2px;
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @media (max-width: 768px) {
-            .philosophers-grid {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .legacy-grid {
                 grid-template-columns: 1fr;
             }
             
             h1 {
-                font-size: 2.2rem;
+                font-size: 2.5em;
             }
             
-            .illuminated-letter {
-                font-size: 3rem;
+            .philosopher-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+        }
+
+        /* Botón flotante para volver al home */
+        .floating-home-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            border: none;
+            cursor: pointer;
+        }
+
+        .floating-home-btn:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+            background: linear-gradient(135deg, #5a67d8, #667eea);
+        }
+
+        .floating-home-btn:active {
+            transform: translateY(-2px) scale(1.05);
+        }
+
+        .floating-home-btn::before {
+            content: '🏠';
+            font-size: 1.3rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Responsive para móviles */
+        @media (max-width: 768px) {
+            .floating-home-btn {
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
             }
             
-            .container {
-                padding: 10px;
+            .floating-home-btn::before {
+                font-size: 1.1rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="parchment-bg">
-        <div class="floating-cross" style="top: 10%; left: 5%;">✠</div>
-        <div class="floating-cross" style="top: 20%; right: 10%; animation-delay: -3s;">☩</div>
-        <div class="floating-cross" style="bottom: 30%; left: 15%; animation-delay: -6s;">✠</div>
-        <div class="floating-cross" style="bottom: 20%; right: 5%; animation-delay: -9s;">☩</div>
+    <div class="container">
+        <header>
+            <div class="period">♪ 500 - 1400 d.C. ♫</div>
+            <h1>Filosofía Medieval de la Música</h1>
+            <p class="subtitle">El Encuentro entre la Sabiduría Clásica y la Fe Cristiana en la Comprensión de la Belleza Musical</p>
+        </header>
 
-        <div class="container">
-            <header>
-                <h1>Filosofía Medieval del Arte</h1>
-                <p class="subtitle">La Síntesis entre Fe y Belleza</p>
-                <p class="period-dates">500 - 1400 d.C.</p>
-            </header>
+        <div class="intro-section">
+            <h2 style="color: #8B4513; font-size: 2em; margin-bottom: 20px; text-align: center;">
+                <span class="music-symbol">♪</span>
+                El Contexto Histórico-Filosófico
+                <span class="music-symbol">♫</span>
+            </h2>
+            <p>La filosofía medieval de la música representa uno de los períodos más ricos y complejos en la historia del pensamiento estético. Durante casi mil años, los pensadores cristianos se enfrentaron al desafío de integrar la herencia clásica grecorromana con las nuevas verdades reveladas por el cristianismo. La música, considerada tanto ciencia matemática como arte divino, se convirtió en un campo privilegiado para esta síntesis intelectual.</p>
+            
+            <p style="margin-top: 15px;">Este período se caracteriza por la búsqueda de una comprensión trascendente de la belleza musical, donde los sonidos terrestres se conciben como ecos de la armonía celestial. Los filósofos medievales no solo teorizaron sobre la música, sino que la vivieron como una experiencia mística capaz de elevar el alma humana hacia la contemplación de lo divino.</p>
+        </div>
 
-            <div class="intro-section">
-                <p><span class="illuminated-letter">L</span>a filosofía medieval del arte representa un período fascinante donde <span class="highlight">la fe cristiana se fusiona con la herencia clásica</span>, creando una nueva comprensión de la belleza como reflejo de lo divino. Durante estos casi mil años, pensadores como San Agustín, Santo Tomás de Aquino y Pseudo-Dionisio desarrollaron teorías estéticas que influirían profundamente en el arte occidental.</p>
-                
-                <p>La música, considerada una de las artes liberales, ocupó un lugar privilegiado como <span class="highlight">puente entre lo matemático y lo espiritual</span>, siendo vista como un eco de la armonía celestial en la Tierra.</p>
+        <div class="philosopher-section agustin">
+            <div class="philosopher-header">
+                <h2 class="philosopher-name">San Agustín de Hipona</h2>
+                <span class="philosopher-dates">354-430 d.C.</span>
+            </div>
+            
+            <p style="font-size: 1.2em; margin-bottom: 25px;">El arquitecto de la estética cristiana, San Agustín estableció los fundamentos filosóficos que dominarían el pensamiento musical medieval durante siglos. Su genialidad radicó en la habilidad para transformar la filosofía platónica en una teología musical profundamente cristiana.</p>
+
+            <div class="major-work">
+                <div class="work-title">♪ "De Musica" (389-391 d.C.) ♫</div>
+                <p>Esta obra monumental de seis libros constituye el primer tratado sistemático de filosofía musical cristiana. Agustín no se limita a analizar los aspectos técnicos de la música, sino que desarrolla una completa ontología del sonido y del ritmo como manifestaciones del orden divino en la creación.</p>
             </div>
 
-            <h2 class="section-title">Los Grandes Filósofos Medievales</h2>
-
-            <div class="philosophers-grid">
-                <div class="philosopher-card">
-                    <h3 class="philosopher-name">
-                        ✠ San Agustín de Hipona
-                    </h3>
-                    <p class="philosopher-dates">(354-430 d.C.)</p>
-                    <div class="philosopher-content">
-                        <p>Pionero de la estética cristiana, San Agustín revolucionó el pensamiento sobre la belleza al integrar la filosofía platónica con la teología cristiana.</p>
-                        
-                        <div class="key-concept">
-                            <h4>La Belleza como Reflejo Divino</h4>
-                            <p>Para Agustín, toda belleza terrena es un <span class="highlight">vestigio de la belleza divina</span>. Las cosas bellas nos atraen porque despiertan en nosotros el recuerdo de Dios, fuente de toda belleza.</p>
-                        </div>
-
-                        <div class="music-quote">
-                            <p><strong>"De Musica" - Su Tratado Musical:</strong></p>
-                            <p>"La música es la ciencia del bien modular. Es un arte que nos eleva hacia Dios a través de los números sonoros y la armonía temporal."</p>
-                        </div>
-
-                        <div class="key-concept">
-                            <h4>La Música como Matemática Divina</h4>
-                            <p>Agustín veía en la música una <span class="highlight">ciencia matemática que disciplina el alma</span>. Los ritmos y proporciones musicales reflejan el orden cósmico establecido por el Creador.</p>
-                        </div>
-                    </div>
+            <div class="content-grid">
+                <div class="concept-box">
+                    <div class="concept-title">La Música como Ciencia Matemática</div>
+                    <p>Para Agustín, la música es fundamentalmente <em>scientia bene modulandi</em> (la ciencia del buen modular). Los números y proporciones que rigen la armonía musical reflejan la estructura matemática del cosmos, creado por Dios según medida, número y peso.</p>
                 </div>
-
-                <div class="philosopher-card">
-                    <h3 class="philosopher-name">
-                        ✠ Santo Tomás de Aquino
-                    </h3>
-                    <p class="philosopher-dates">(1225-1274 d.C.)</p>
-                    <div class="philosopher-content">
-                        <p>El Doctor Angélico sistematizó la filosofía aristotélica dentro del marco cristiano, creando una síntesis que dominaría el pensamiento medieval tardío.</p>
-                        
-                        <div class="key-concept">
-                            <h4>Las Tres Condiciones de la Belleza</h4>
-                            <p><strong>1. Integridad</strong> - La cosa debe estar completa<br>
-                            <strong>2. Proporción</strong> - Debe haber armonía entre las partes<br>
-                            <strong>3. Claridad</strong> - Debe ser luminosa y comprensible</p>
-                        </div>
-
-                        <div class="music-quote">
-                            <p><strong>La Música Sacra:</strong></p>
-                            <p>"La música en el culto divino es un medio de contemplación que eleva el alma hacia Dios. La armonía sonora refleja el orden cósmico establecido por la Providencia."</p>
-                        </div>
-
-                        <div class="key-concept">
-                            <h4>El Arte como Imitación Racional</h4>
-                            <p>A diferencia de Platón, Tomás ve el arte como <span class="highlight">imitación inteligente que revela la esencia</span> de las cosas, no mera copia superficial.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="philosopher-card">
-                    <h3 class="philosopher-name">
-                        ✠ Pseudo-Dionisio Areopagita
-                    </h3>
-                    <p class="philosopher-dates">(Siglo VI d.C.)</p>
-                    <div class="philosopher-content">
-                        <p>Místico cristiano cuya teología de la luz influenció profundamente el arte gótico y la comprensión medieval de la belleza como teofanía.</p>
-                        
-                        <div class="key-concept">
-                            <h4>La Estética de la Luz</h4>
-                            <p>La luz es el <span class="highlight">símbolo supremo de lo divino</span>. Toda belleza participa de la luz divina, y el arte debe aspirar a ser transparente a esta iluminación celestial.</p>
-                        </div>
-
-                        <div class="music-quote">
-                            <p><strong>La Jerarquía Celestial:</strong></p>
-                            <p>"Los cantos angélicos son la música perfecta. La música terrena debe aspirar a imitar esa armonía celestial que alaba eternamente al Creador."</p>
-                        </div>
-
-                        <div class="key-concept">
-                            <h4>Via Pulchritudinis</h4>
-                            <p>La belleza es un <span class="highlight">camino hacia Dios</span> (via pulchritudinis). A través de la contemplación de lo bello, el alma asciende hacia el Creador.</p>
-                        </div>
-                    </div>
+                
+                <div class="concept-box">
+                    <div class="concept-title">La Belleza como Vestigio Divino</div>
+                    <p>La belleza musical terrena es un <em>vestigium Dei</em>, una huella de la belleza divina impresa en la creación. Aunque imperfecta, posee el poder de despertar en el alma el recuerdo de su origen celestial y el deseo de retorno a Dios.</p>
                 </div>
             </div>
 
-            <div class="timeline">
-                <h2 class="section-title">Cronología del Pensamiento Estético Medieval</h2>
-                
-                <div class="timeline-item">
-                    <div class="timeline-date">354-430</div>
-                    <div>San Agustín desarrolla la primera estética cristiana en "De Musica" y "Confesiones"</div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-date">Siglo VI</div>
-                    <div>Pseudo-Dionisio establece la teología de la luz que inspirará el arte gótico</div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-date">Siglo IX</div>
-                    <div>Renacimiento Carolingio: revival del interés por las artes liberales</div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-date">1140-1151</div>
-                    <div>Abad Suger construye Saint-Denis aplicando principios dionisiacos</div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-date">1225-1274</div>
-                    <div>Santo Tomás sistematiza la estética aristotélica-cristiana</div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-date">Siglo XIII</div>
-                    <div>Apogeo del arte gótico: catedrales como Chartres y Notre-Dame</div>
-                </div>
+            <div class="quote-box">
+                Cuando escucho cantar melodías sagradas con voz suave y arte consumado, confieso que experimento cierto descanso religioso; mas cuando me doy cuenta de que me conmueve más el canto que lo que se canta, me acuso de pecar gravemente.
             </div>
 
-            <div class="interactive-section">
-                <h2 class="section-title">Conceptos Clave Interactivos</h2>
-                <p>Haz clic en cada concepto para explorar su significado:</p>
+            <div class="content-grid">
+                <div class="concept-box">
+                    <div class="concept-title">Los Seis Géneros de Números Musicales</div>
+                    <p><strong>1. Números Sonantes:</strong> Los que existen en el sonido mismo<br>
+                    <strong>2. Números Occursores:</strong> Los percibidos por el oído<br>
+                    <strong>3. Números Progresores:</strong> Los producidos por quien canta<br>
+                    <strong>4. Números Recordabiles:</strong> Los conservados en la memoria<br>
+                    <strong>5. Números Judiciales:</strong> Los que juzgan la belleza musical<br>
+                    <strong>6. Números Sensiles:</strong> Los que causan placer estético</p>
+                </div>
                 
-                <div class="concept-card" onclick="toggleConcept(this)">
-                    <h4>🎵 Música Mundana, Humana y Instrumental</h4>
-                    <div class="concept-explanation">
-                        <p><strong>Música Mundana:</strong> La armonía de las esferas celestiales - inaudible para nosotros pero que gobierna el cosmos.</p>
-                        <p><strong>Música Humana:</strong> La armonía interior del alma humana - el equilibrio entre cuerpo y espíritu.</p>
-                        <p><strong>Música Instrumental:</strong> La música que efectivamente escuchamos - reflejo terreno de las armonías superiores.</p>
-                    </div>
+                <div class="concept-box">
+                    <div class="concept-title">La Ascensión Musical del Alma</div>
+                    <p>Agustín describe un proceso de ascensión espiritual a través de la música: desde el placer sensible de los sonidos, pasando por el reconocimiento de las proporciones matemáticas, hasta la contemplación de la Belleza eterna e inmutable en Dios.</p>
                 </div>
-
-                <div class="concept-card" onclick="toggleConcept(this)">
-                    <h4>✨ Pulchrum, Bonum, Verum</h4>
-                    <div class="concept-explanation">
-                        <p>Los tres trascendentales medievales que se identifican con Dios:</p>
-                        <p><strong>Pulchrum (Belleza):</strong> Lo que agrada a la vista - reflejo de la perfección divina</p>
-                        <p><strong>Bonum (Bondad):</strong> Lo que tiende al bien - manifestación de la voluntad de Dios</p>
-                        <p><strong>Verum (Verdad):</strong> Lo que es conforme a la realidad - expresión del intelecto divino</p>
-                    </div>
-                </div>
-
-                <div class="concept-card" onclick="toggleConcept(this)">
-                    <h4>🏛️ Ars Mechanica vs Ars Liberalis</h4>
-                    <div class="concept-explanation">
-                        <p><strong>Artes Mecánicas:</strong> Oficios manuales considerados inferiores (arquitectura, pintura, escultura)</p>
-                        <p><strong>Artes Liberales:</strong> Disciplinas intelectuales superiores, incluyendo la música en el Quadrivium junto con aritmética, geometría y astronomía</p>
-                        <p>Esta distinción explicaba por qué la música tenía mayor prestigio que las artes visuales en la jerarquía medieval.</p>
-                    </div>
-                </div>
-
-                <div class="concept-card" onclick="toggleConcept(this)">
-                    <h4>⛪ Estética Gótica</h4>
-                    <div class="concept-explanation">
-                        <p>La arquitectura gótica aplicó principios filosóficos medievales:</p>
-                        <p><strong>Verticalidad:</strong> Elevación hacia lo divino</p>
-                        <p><strong>Luz:</strong> Símbolo de iluminación espiritual</p>
-                        <p><strong>Proporción:</strong> Reflejo del orden cósmico</p>
-                        <p><strong>Simbolismo:</strong> Cada elemento arquitectónico tenía significado teológico</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="interactive-section">
-                <h2 class="section-title">Comparación: Antigüedad vs Medioevo</h2>
-                
-                <table class="comparison-table">
-                    <thead>
-                        <tr>
-                            <th>Aspecto</th>
-                            <th>Filosofía Antigua</th>
-                            <th>Filosofía Medieval</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Fuente de Belleza</strong></td>
-                            <td>Naturaleza, Formas platónicas</td>
-                            <td>Dios como fuente suprema</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Función del Arte</strong></td>
-                            <td>Mimesis, catarsis, educación</td>
-                            <td>Elevación espiritual, alabanza divina</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Música</strong></td>
-                            <td>Armonía matemática, ethos</td>
-                            <td>Eco de la armonía celestial</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Conocimiento</strong></td>
-                            <td>Razón humana</td>
-                            <td>Fe iluminada por la razón</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Finalidad</strong></td>
-                            <td>Perfección humana, contemplación</td>
-                            <td>Unión con Dios, salvación</td>
-                        </tr>
-                    </tbody>
-                </table>
             </div>
         </div>
+
+        <div class="philosopher-section tomas">
+            <div class="philosopher-header">
+                <h2 class="philosopher-name">Santo Tomás de Aquino</h2>
+                <span class="philosopher-dates">1225-1274 d.C.</span>
+            </div>
+            
+            <p style="font-size: 1.2em; margin-bottom: 25px;">El Doctor Angélico llevó la filosofía musical medieval a su máxima sistematización, integrando magistralmente la tradición agustiniana con el redescubierto aristotelismo. Su contribución trasciende la música para establecer los fundamentos de toda estética escolástica.</p>
+
+            <div class="major-work">
+                <div class="work-title">♫ "Summa Theologiae" - Tratado sobre la Belleza ♪</div>
+                <p>Aunque Tomás no escribió un tratado específico sobre música, sus reflexiones estéticas dispersas en la Summa constituyen la síntesis más perfecta entre filosofía aristotélica y teología cristiana aplicada a la comprensión de la belleza musical.</p>
+            </div>
+
+            <div class="content-grid">
+                <div class="concept-box">
+                    <div class="concept-title">Las Tres Condiciones de la Belleza</div>
+                    <p><strong>Integritas:</strong> La perfección y completitud de la forma musical<br>
+                    <strong>Proportio:</strong> La armonía y proporción entre las partes<br>
+                    <strong>Claritas:</strong> La luminosidad que hace resplandencer la forma</p>
+                </div>
+                
+                <div class="concept-box">
+                    <div class="concept-title">El Conocimiento Musical</div>
+                    <p>Tomás distingue entre el conocimiento sensible de la música (que capta los sonidos) y el conocimiento intelectual (que comprende las relaciones matemáticas), estableciendo que la verdadera apreciación musical requiere ambos niveles.</p>
+                </div>
+            </div>
+
+            <div class="quote-box">
+                La belleza consiste en la debida proporción, pues los sentidos se deleitan en las cosas debidamente proporcionadas, como en algo que les es semejante; también el sentido y toda facultad cognositiva es cierta proporción.
+            </div>
+
+            <div class="content-grid">
+                <div class="concept-box">
+                    <div class="concept-title">La Música Sacra como Contemplación</div>
+                    <p>Para Tomás, la música litúrgica no es mero adorno del culto, sino un medio privilegiado de contemplación divina. La armonía sonora eleva el entendimiento hacia la contemplación del orden cósmico establecido por la Providencia divina.</p>
+                </div>
+                
+                <div class="concept-box">
+                    <div class="concept-title">La Proporción como Principio Universal</div>
+                    <p>La proporción musical se convierte en el principio explicativo de toda belleza. Las relaciones armónicas que rigen los intervalos musicales reflejan las proporciones que Dios ha impreso en todo el cosmos, desde los movimientos planetarios hasta la estructura del alma humana.</p>
+                </div>
+            </div>
+
+            <div class="influence-section">
+                <h3 style="color: #4169E1; font-size: 1.8em; margin-bottom: 20px; text-align: center;">Influencia en la Música Litúrgica</h3>
+                <p>La filosofía tomista influyó profundamente en el desarrollo del canto gregoriano y la polifonía sacra. Los compositores medievales aplicaron conscientemente los principios de proporción y claritas en sus obras, buscando crear una música que fuera no solo bella, sino teológicamente correcta.</p>
+                
+                <p style="margin-top: 15px;">La sistematización tomista de los principios estéticos proporcionó las bases teóricas para la evaluación y composición de música sacra, estableciendo criterios que perdurarían hasta el Concilio de Trento y más allá.</p>
+            </div>
+        </div>
+
+        <div class="philosopher-section dionisio">
+            <div class="philosopher-header">
+                <h2 class="philosopher-name">Pseudo-Dionisio Areopagita</h2>
+                <span class="philosopher-dates">Siglo VI d.C.</span>
+            </div>
+            
+            <p style="font-size: 1.2em; margin-bottom: 25px;">El misterioso autor conocido como Pseudo-Dionisio revolucionó la estética medieval con su teología mística de la luz. Aunque su identidad permanece desconocida, su influencia en la filosofía musical y arquitectónica medieval fue inmensa, inspirando desde el canto bizantino hasta el arte gótico.</p>
+
+            <div class="major-work">
+                <div class="work-title">♪ "De Caelesti Hierarchia" y "De Mystica Theologia" ♫</div>
+                <p>Estas obras fundamentales desarrollan una estética de la luz como símbolo supremo de lo divino. La música, entendida como armonía luminosa, se convierte en una vía privilegiada de ascensión espiritual hacia la unión mística con Dios.</p>
+            </div>
+
+            <div class="content-grid">
+                <div class="concept-box">
+                    <div class="concept-title">La Estética de la Luz Divina</div>
+                    <p>Dionisio concibe la belleza como irradiación de la luz divina. La música, por su naturaleza inmaterial y temporal, participa de manera especial de esta luminosidad, siendo capaz de transfigurar tanto al ejecutante como al oyente.</p>
+                </div>
+                
+                <div class="concept-box">
+                    <div class="concept-title">La Jerarquía Celestial Musical</div>
+                    <p>Los coros angélicos organizados jerárquicamente cantan eternamente las alabanzas divinas. La música terrena debe aspirar a imitar esta armonía celestial, convirtiéndose en un eco temporal de la liturgia eterna.</p>
+                </div>
+            </div>
+
+            <div class="quote-box">
+                Todas las cosas aspiran a la Belleza y al Bien, y no hay ser alguno que no participe de lo Bello y Bueno... Lo Bello y el Bien son causa de la armonía y de la simpatía de todas las cosas.
+            </div>
+
+            <div class="content-grid">
+                <div class="concept-box">
+                    <div class="concept-title">La Vía Negativa Musical</div>
+                    <p>Dionisio propone que la verdadera comprensión de la belleza divina requiere trascender las limitaciones de los sonidos terrestres. La música más perfecta sería aquella que conduce al silencio contemplativo, donde el alma se une directamente con lo Absoluto.</p>
+                </div>
+                
+                <div class="concept-box">
+                    <div class="concept-title">Simbolismo y Anagogía</div>
+                    <p>Cada elemento musical posee un significado simbólico que trasciende su realidad inmediata. Los intervalos, ritmos y melodías son símbolos sagrados que elevan el espíritu hacia realidades superiores mediante el proceso anagógico.</p>
+                </div>
+            </div>
+
+            <div class="influence-section">
+                <h3 style="color: #FFD700; font-size: 1.8em; margin-bottom: 20px; text-align: center;">Influencia en el Arte Gótico</h3>
+                <p>Las ideas estéticas de Dionisio inspiraron profundamente la arquitectura gótica, donde la luz filtrada por los vitrales crea una atmósfera musical-luminosa. Las catedrales góticas fueron concebidas como instrumentos musicales gigantescos, donde la arquitectura, la luz y el sonido se unifican en una síntesis estética total.</p>
+                
+                <p style="margin-top: 15px;">El desarrollo de la polifonía coincide con el auge del gótico, ambos inspirados por la visión dionisiana de una belleza que eleva el alma hacia lo trascendente mediante la experiencia sensible transfigurada.</p>
+            </div>
+        </div>
+
+        <div class="timeline">
+            <h2 style="text-align: center; margin-bottom: 35px; color: #2c3e50; font-size: 2.2em;">
+                <span class="music-symbol">♪</span>
+                Cronología del Pensamiento Musical Medieval
+                <span class="music-symbol">♫</span>
+            </h2>
+            
+            <div class="timeline-item">
+                <div class="century">Siglos V-VI</div>
+                <h3>Fundaciones Patrísticas</h3>
+                <p>San Agustín establece los fundamentos de la estética musical cristiana con "De Musica". Boecio transmite la teoría musical griega al mundo medieval con "De Institutione Musica". Pseudo-Dionisio desarrolla la estética de la luz divina.</p>
+            </div>
+
+            <div class="timeline-item">
+                <div class="century">Siglos VII-IX</div>
+                <h3>Sistematización Litúrgica</h3>
+                <p>Consolidación del canto gregoriano bajo San Gregorio Magno. Desarrollo de la teoría de los modos eclesiásticos. Fundación de las primeras escuelas catedralicias donde se enseña música como disciplina del quadrivium.</p>
+            </div>
+
+            <div class="timeline-item">
+                <div class="century">Siglos X-XII</div>
+                <h3>Renacimiento Carolingio y Escolástica Temprana</h3>
+                <p>Alcuino de York y la escuela palatina carolingia revitalizan los estudios musicales. Guido de Arezzo revoluciona la notación musical. Desarrollo de la polifonía en las escuelas catedralicias. Hugh de San Víctor integra la música en el programa educativo cristiano.</p>
+            </div>
+
+            <div class="timeline-item">
+                <div class="century">Siglo XIII</div>
+                <h3>Apogeo Escolástico</h3>
+                <p>Santo Tomás de Aquino sistematiza la estética musical escolástica. San Alberto Magno desarrolla la teoría de la percepción musical. Florecimiento de la Escuela de Notre-Dame con Leonin y Perotin. La Universidad de París se convierte en centro del pensamiento musical.</p>
+            </div>
+
+            <div class="timeline-item">
+                <div class="century">Siglo XIV</div>
+                <h3>Crisis y Transición</h3>
+                <p>Guillermo de Ockham desafía las síntesis escolásticas tradicionales. El "Ars Nova" de Philippe de Vitry introduce nuevas concepciones rítmicas. Crisis del pensamiento medieval que prepara el terreno para el Renacimiento.</p>
+            </div>
+        </div>
+
+        <div class="legacy-grid">
+            <div class="legacy-card">
+                <span class="legacy-icon" style="color: #DC143C;">⛪</span>
+                <h3>Música Litúrgica</h3>
+                <p>La filosofía medieval estableció los principios teóricos que rigieron la música sacra durante siglos, desde el canto gregoriano hasta la polifonía renacentista.</p>
+            </div>
+            
+            <div class="legacy-card">
+                <span class="legacy-icon" style="color: #4169E1;">🎵</span>
+                <h3>Teoría Musical</h3>
+                <p>Los conceptos de proporción, armonía y belleza desarrollados en el período medieval siguen siendo fundamentales en la teoría musical occidental.</p>
+            </div>
+            
+            <div class="legacy-card">
+                <span class="legacy-icon" style="color: #FFD700;">🏛️</span>
+                <h3>Estética Arquitectónica</h3>
+                <p>La síntesis entre música y arquitectura inspiró las grandes catedrales góticas, concebidas como instrumentos musicales pétreos.</p>
+            </div>
+            
+            <div class="legacy-card">
+                <span class="legacy-icon" style="color: #8B4513;">📚</span>
+                <h3>Filosofía de la Belleza</h3>
+                <p>Los principios estéticos medievales influyeron en todo el desarrollo posterior de la filosofía del arte occidental, desde el Renacimiento hasta la modernidad.</p>
+            </div>
+        </div>
+
+        <footer>
+            <h2 style="color: #2F4F4F; margin-bottom: 20px;">El Legado Imperecedero</h2>
+            <p style="font-size: 1.2em;">La filosofía medieval de la música representa una de las síntesis intelectuales más extraordinarias de la historia occidental. Durante casi mil años, los pensadores cristianos forjaron una comprensión de la belleza musical que integró magistralmente la herencia clásica con la revelación cristiana, creando un sistema estético que continúa iluminando nuestra comprensión del arte y la trascendencia.</p>
+            
+            <p style="margin-top: 20px; font-style: italic; color: #8B4513;">
+                <span class="music-symbol">♪</span>
+                "En la música terrena escuchamos el eco de la armonía celestial"
+                <span class="music-symbol">♫</span>
+            </p>
+        </footer>
     </div>
 
-    <script>
-        function toggleConcept(element) {
-            const explanation = element.querySelector('.concept-explanation');
-            const isActive = element.classList.contains('active');
-            
-            // Close all other concepts
-            document.querySelectorAll('.concept-card').forEach(card => {
-                card.classList.remove('active');
-                card.querySelector('.concept-explanation').classList.remove('active');
-            });
-            
-            // Toggle current concept
-            if (!isActive) {
-                element.classList.add('active');
-                explanation.classList.add('active');
-            }
-        }
+    <a href="index.html" class="floating-home-btn" title="Volver al inicio"></a>
 
-        // Add floating animation to crosses
-        setInterval(() => {
-            const crosses = document.querySelectorAll('.floating-cross');
-            crosses.forEach(cross => {
-                const newTop = Math.random() * 80 + 10;
-                const newLeft = Math.random() * 80 + 10;
-                cross.style.top = newTop + '%';
-                cross.style.left = newLeft + '%';
-            });
-        }, 15000);
-
-        // Add scroll reveal effect
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animation = 'slideDown 0.6s ease forwards';
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.philosopher-card, .timeline-item, .concept-card').forEach(el => {
-            observer.observe(el);
-        });
-    </script>
 </body>
 </html>
