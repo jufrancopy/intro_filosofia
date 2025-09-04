@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +16,8 @@
             font-family: 'Georgia', serif;
             line-height: 1.6;
             color: #2c3e50;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-color: #FFFFF0;
+            /* Ivory */
             min-height: 100vh;
         }
 
@@ -28,17 +30,16 @@
         header {
             text-align: center;
             padding: 60px 0;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            background: transparent;
             border-radius: 20px;
             margin-bottom: 40px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            box-shadow: none;
         }
 
         h1 {
             font-size: 3.5rem;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            color: #2c3e50;
+            text-shadow: none;
             margin-bottom: 20px;
             animation: fadeInUp 1s ease-out;
         }
@@ -99,16 +100,82 @@
             transform: translateX(5px);
         }
 
+        /* Estilos de la barra de navegación */
+        .navbar {
+            background: rgba(25, 25, 50, 0.7);
+            /* Un color azul oscuro/púrpura semi-transparente */
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #ff6b6b;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #ff6b6b;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-logo {
+            height: 60px;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-logo:hover {
+            transform: scale(1.1);
+        }
+
         /* Centrar el botón "Ver todo" */
-        .period > .view-all-btn {
-            display: block;          /* Para ocupar toda la línea */
-            margin: 20px auto;       /* Centrado horizontal automático */
-            width: fit-content;      /* Tamaño justo al contenido */
+        .period>.view-all-btn {
+            display: block;
+            /* Para ocupar toda la línea */
+            margin: 20px auto;
+            /* Centrado horizontal automático */
+            width: fit-content;
+            /* Tamaño justo al contenido */
         }
 
         .subtitle {
             font-size: 1.3rem;
-            color: rgba(255, 255, 255, 0.9);
+            color: #555;
             font-style: italic;
             animation: fadeInUp 1s ease-out 0.3s both;
         }
@@ -144,7 +211,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
             transition: left 0.5s;
         }
 
@@ -298,6 +365,7 @@
                 opacity: 0;
                 transform: translateY(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -309,6 +377,7 @@
                 opacity: 0;
                 max-height: 0;
             }
+
             to {
                 opacity: 1;
                 max-height: 2000px;
@@ -319,15 +388,15 @@
             h1 {
                 font-size: 2.5rem;
             }
-            
+
             .period-title {
                 font-size: 1.5rem;
             }
-            
+
             .philosophers {
                 grid-template-columns: 1fr;
             }
-            
+
             .container {
                 padding: 10px;
             }
@@ -343,17 +412,31 @@
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
-        }
 
-        
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
+        }
     </style>
 </head>
+
 <body>
-    <div class="floating-note" style="top: 10%; left: 5%;">♪</div>
-    <div class="floating-note" style="top: 20%; right: 10%; animation-delay: -2s;">♫</div>
-    <div class="floating-note" style="bottom: 30%; left: 15%; animation-delay: -4s;">♪</div>
+    <nav class="navbar">
+        <a href="index.html">
+            <img src="logo.png" alt="Logo Filosofía" class="nav-logo">
+        </a>
+        <ul class="nav-menu">
+            <li><a href="../index.html" class="nav-link">Inicio</a></li>
+            <li><a href="../history_music_py/index.html" class="nav-link">Historia de la Música</a></li>
+            <li><a href="index.html" class="nav-link">Filosofía</a></li>
+            <li><a href="../contact.html" class="nav-link">Contacto</a></li>
+        </ul>
+    </nav>
 
     <div class="container">
         <header>
@@ -373,19 +456,26 @@
                 <div class="philosophers">
                     <div class="philosopher">
                         <h4>Platón (428-348 a.C.)</h4>
-                        <p>Desarrolló la teoría de la mimesis, considerando el arte como una imitación de imitaciones. <span class="music-note">♪</span> Creía que la música tenía poder educativo y moral, capaz de formar el carácter del alma. En "La República", propuso modos musicales específicos para la educación de los guardianes.</p>
+                        <p>Desarrolló la teoría de la mimesis, considerando el arte como una imitación de imitaciones.
+                            <span class="music-note">♪</span> Creía que la música tenía poder educativo y moral, capaz
+                            de formar el carácter del alma. En "La República", propuso modos musicales específicos para
+                            la educación de los guardianes.</p>
                     </div>
                     <div class="philosopher">
                         <h4>Aristóteles (384-322 a.C.)</h4>
-                        <p>En su "Poética", defendió el arte como catarsis emocional. <span class="music-note">♫</span> Consideraba la música como la más imitativa de las artes, capaz de representar directamente los estados del alma y las emociones humanas a través del ritmo y la melodía.</p>
+                        <p>En su "Poética", defendió el arte como catarsis emocional. <span class="music-note">♫</span>
+                            Consideraba la música como la más imitativa de las artes, capaz de representar directamente
+                            los estados del alma y las emociones humanas a través del ritmo y la melodía.</p>
                     </div>
                     <div class="philosopher">
                         <h4>Plotino (205-270 d.C.)</h4>
-                        <p>Renovó la estética platónica, viendo la belleza como emanación del Uno. El arte no imita lo sensible, sino que revela la forma inteligible. <span class="music-note">♪</span> La música, por su naturaleza matemática, acerca el alma a la armonía universal.</p>
+                        <p>Renovó la estética platónica, viendo la belleza como emanación del Uno. El arte no imita lo
+                            sensible, sino que revela la forma inteligible. <span class="music-note">♪</span> La música,
+                            por su naturaleza matemática, acerca el alma a la armonía universal.</p>
                     </div>
                 </div>
             </div>
-                <a href="antigua.html" class="view-all-btn">Ver todo</a>
+            <a href="antigua.html" class="view-all-btn">Ver todo</a>
         </div>
 
         <div class="period" data-period="medieval">
@@ -400,19 +490,24 @@
                 <div class="philosophers">
                     <div class="philosopher">
                         <h4>San Agustín (354-430)</h4>
-                        <p>Integró la belleza platónica con la teología cristiana. <span class="music-note">♪</span> En "De Musica", exploró la música como ciencia matemática que eleva el alma hacia Dios. La belleza terrena es reflejo de la belleza divina.</p>
+                        <p>Integró la belleza platónica con la teología cristiana. <span class="music-note">♪</span> En
+                            "De Musica", exploró la música como ciencia matemática que eleva el alma hacia Dios. La
+                            belleza terrena es reflejo de la belleza divina.</p>
                     </div>
                     <div class="philosopher">
                         <h4>Santo Tomás de Aquino (1225-1274)</h4>
-                        <p>Definió la belleza con tres condiciones: integridad, proporción y claridad. <span class="music-note">♫</span> Veía en la música sacra un medio de contemplación divina, donde la armonía sonora refleja el orden cósmico establecido por Dios.</p>
+                        <p>Definió la belleza con tres condiciones: integridad, proporción y claridad. <span
+                                class="music-note">♫</span> Veía en la música sacra un medio de contemplación divina,
+                            donde la armonía sonora refleja el orden cósmico establecido por Dios.</p>
                     </div>
                     <div class="philosopher">
                         <h4>Pseudo-Dionisio Areopagita (s. VI)</h4>
-                        <p>Desarrolló una estética de la luz como símbolo de lo divino. El arte gótico se inspiró en sus ideas sobre la belleza como vía de ascensión espiritual.</p>
+                        <p>Desarrolló una estética de la luz como símbolo de lo divino. El arte gótico se inspiró en sus
+                            ideas sobre la belleza como vía de ascensión espiritual.</p>
                     </div>
-                </div> 
+                </div>
             </div>
-            <a href="medieval.html" class="view-all-btn">Ver todo</a>  
+            <a href="medieval.html" class="view-all-btn">Ver todo</a>
         </div>
 
         <div class="period" data-period="renaissance">
@@ -427,15 +522,21 @@
                 <div class="philosophers">
                     <div class="philosopher">
                         <h4>León Battista Alberti (1404-1472)</h4>
-                        <p>Sistematizó las reglas de la perspectiva y proporción en el arte. <span class="music-note">♪</span> Aplicó principios matemáticos tanto a la arquitectura como a la música, buscando la armonía perfecta basada en ratios numéricos.</p>
+                        <p>Sistematizó las reglas de la perspectiva y proporción en el arte. <span
+                                class="music-note">♪</span> Aplicó principios matemáticos tanto a la arquitectura como a
+                            la música, buscando la armonía perfecta basada en ratios numéricos.</p>
                     </div>
                     <div class="philosopher">
                         <h4>Marsilio Ficino (1433-1499)</h4>
-                        <p>Renovó el platonismo, viendo el arte como vía de conocimiento de las Ideas. <span class="music-note">♫</span> Consideraba la música como magia natural que puede influir en el alma y curar enfermedades a través de la correspondencia cósmica.</p>
+                        <p>Renovó el platonismo, viendo el arte como vía de conocimiento de las Ideas. <span
+                                class="music-note">♫</span> Consideraba la música como magia natural que puede influir
+                            en el alma y curar enfermedades a través de la correspondencia cósmica.</p>
                     </div>
                     <div class="philosopher">
                         <h4>Giorgio Vasari (1511-1574)</h4>
-                        <p>Estableció la historia del arte como disciplina, creando el concepto de "Bellas Artes". Defendió la superioridad del disegno italiano y la evolución progresiva del arte hacia la perfección.</p>
+                        <p>Estableció la historia del arte como disciplina, creando el concepto de "Bellas Artes".
+                            Defendió la superioridad del disegno italiano y la evolución progresiva del arte hacia la
+                            perfección.</p>
                     </div>
                 </div>
             </div>
@@ -454,15 +555,22 @@
                 <div class="philosophers">
                     <div class="philosopher">
                         <h4>Immanuel Kant (1724-1804)</h4>
-                        <p>Revolucionó la estética con su "Crítica del Juicio". Definió la belleza como "finalidad sin fin" y estableció el juicio estético como universal pero subjetivo. <span class="music-note">♪</span> La música, siendo la más directa de las artes, expresa lo inefable sin conceptos.</p>
+                        <p>Revolucionó la estética con su "Crítica del Juicio". Definió la belleza como "finalidad sin
+                            fin" y estableció el juicio estético como universal pero subjetivo. <span
+                                class="music-note">♪</span> La música, siendo la más directa de las artes, expresa lo
+                            inefable sin conceptos.</p>
                     </div>
                     <div class="philosopher">
                         <h4>Gottfried Leibniz (1646-1716)</h4>
-                        <p>Definió la música como "ejercicio aritmético secreto del alma". <span class="music-note">♫</span> Veía en la armonía musical un reflejo de la armonía preestablecida del universo, donde cada mónada refleja la totalidad.</p>
+                        <p>Definió la música como "ejercicio aritmético secreto del alma". <span
+                                class="music-note">♫</span> Veía en la armonía musical un reflejo de la armonía
+                            preestablecida del universo, donde cada mónada refleja la totalidad.</p>
                     </div>
                     <div class="philosopher">
                         <h4>David Hume (1711-1776)</h4>
-                        <p>Desarrolló una estética empirista basada en el sentimiento. El gusto se forma por la experiencia y puede educarse. La crítica artística requiere delicadeza de gusto y amplitud de experiencia.</p>
+                        <p>Desarrolló una estética empirista basada en el sentimiento. El gusto se forma por la
+                            experiencia y puede educarse. La crítica artística requiere delicadeza de gusto y amplitud
+                            de experiencia.</p>
                     </div>
                 </div>
             </div>
@@ -481,18 +589,26 @@
                 <div class="philosophers">
                     <div class="philosopher">
                         <h4>G.W.F. Hegel (1770-1831)</h4>
-                        <p>Concibió el arte como manifestación sensible de la Idea Absoluta. <span class="music-note">♪</span> La música es el arte romántico por excelencia, expresando la interioridad pura del sentimiento sin recurrir a lo espacial o conceptual.</p>
+                        <p>Concibió el arte como manifestación sensible de la Idea Absoluta. <span
+                                class="music-note">♪</span> La música es el arte romántico por excelencia, expresando la
+                            interioridad pura del sentimiento sin recurrir a lo espacial o conceptual.</p>
                     </div>
                     <div class="philosopher">
                         <h4>Arthur Schopenhauer (1788-1860)</h4>
-                        <p>El arte libera temporalmente del sufrimiento de la Voluntad. <span class="music-note">♫</span> La música es especial: no representa las Ideas como otras artes, sino que es copia directa de la Voluntad misma, por eso nos conmueve tan profundamente.</p>
+                        <p>El arte libera temporalmente del sufrimiento de la Voluntad. <span
+                                class="music-note">♫</span> La música es especial: no representa las Ideas como otras
+                            artes, sino que es copia directa de la Voluntad misma, por eso nos conmueve tan
+                            profundamente.</p>
                     </div>
                     <div class="philosopher">
                         <h4>Friedrich Schelling (1775-1854)</h4>
-                        <p>El arte es "órgano de la filosofía", donde se reconcilian lo consciente e inconsciente. <span class="music-note">♪</span> En la música, el tiempo se hace audible como forma pura del movimiento interior del alma.</p>
+                        <p>El arte es "órgano de la filosofía", donde se reconcilian lo consciente e inconsciente. <span
+                                class="music-note">♪</span> En la música, el tiempo se hace audible como forma pura del
+                            movimiento interior del alma.</p>
                     </div>
                 </div>
             </div>
+            <a href="romantic.html" class="view-all-btn">Ver todo</a>
         </div>
 
         <div class="period" data-period="contemporary">
@@ -507,22 +623,31 @@
                 <div class="philosophers">
                     <div class="philosopher">
                         <h4>Walter Benjamin (1892-1940)</h4>
-                        <p>Analizó la pérdida del "aura" en la época de reproducibilidad técnica. <span class="music-note">♪</span> La grabación musical democratiza el acceso pero transforma la experiencia estética, perdiendo la unicidad del evento sonoro.</p>
+                        <p>Analizó la pérdida del "aura" en la época de reproducibilidad técnica. <span
+                                class="music-note">♪</span> La grabación musical democratiza el acceso pero transforma
+                            la experiencia estética, perdiendo la unicidad del evento sonoro.</p>
                     </div>
                     <div class="philosopher">
                         <h4>Theodor Adorno (1903-1969)</h4>
-                        <p>Crítico de la industria cultural, defendió el arte auténtico como resistencia. <span class="music-note">♫</span> La música atonal de Schoenberg revela la verdad del mundo fragmentado moderno, mientras que el jazz es manipulación ideológica.</p>
+                        <p>Crítico de la industria cultural, defendió el arte auténtico como resistencia. <span
+                                class="music-note">♫</span> La música atonal de Schoenberg revela la verdad del mundo
+                            fragmentado moderno, mientras que el jazz es manipulación ideológica.</p>
                     </div>
                     <div class="philosopher">
                         <h4>Martin Heidegger (1889-1976)</h4>
-                        <p>El arte desoculta la verdad del Ser. <span class="music-note">♪</span> La música, especialmente en Hölderlin, habita poéticamente el mundo, revelando la dimensión temporal del Dasein como escucha primordial.</p>
+                        <p>El arte desoculta la verdad del Ser. <span class="music-note">♪</span> La música,
+                            especialmente en Hölderlin, habita poéticamente el mundo, revelando la dimensión temporal
+                            del Dasein como escucha primordial.</p>
                     </div>
                     <div class="philosopher">
                         <h4>Jacques Derrida (1930-2004)</h4>
-                        <p>Deconstruyó las oposiciones tradicionales arte/no-arte. <span class="music-note">♫</span> La música, como escritura sonora, es pura diferencia y diferancia, cuestionando la presencia plena del significado.</p>
+                        <p>Deconstruyó las oposiciones tradicionales arte/no-arte. <span class="music-note">♫</span> La
+                            música, como escritura sonora, es pura diferencia y diferancia, cuestionando la presencia
+                            plena del significado.</p>
                     </div>
                 </div>
             </div>
+            <a href="contemporanea.html" class="view-all-btn">Ver todo</a>
         </div>
 
         <div class="quiz-section">
@@ -612,7 +737,7 @@
         function togglePeriod(period) {
             const content = document.getElementById(period + '-content');
             const icon = document.querySelector(`[data-period="${period}"] .toggle-icon`);
-            
+
             if (content.classList.contains('active')) {
                 content.classList.remove('active');
                 icon.textContent = '▼';
@@ -624,7 +749,7 @@
                     i.textContent = '▼';
                     i.style.transform = 'rotate(0deg)';
                 });
-                
+
                 content.classList.add('active');
                 icon.textContent = '▲';
                 icon.style.transform = 'rotate(180deg)';
@@ -640,18 +765,18 @@
             periods.forEach(period => {
                 const periodQuestions = questions[period];
                 const randomQuestion = periodQuestions[Math.floor(Math.random() * periodQuestions.length)];
-                
+
                 quizHTML += `
                     <div class="question" data-period="${period}" data-correct="${randomQuestion.correct}" data-index="${questionIndex}">
                         <h4>Período: ${getPeriodName(period)}</h4>
                         <p><strong>${randomQuestion.question}</strong></p>
                         <div class="options">
-                            ${randomQuestion.options.map((option, i) => 
-                                `<label class="option" data-value="${i}">
+                            ${randomQuestion.options.map((option, i) =>
+                    `<label class="option" data-value="${i}">
                                     <input type="radio" name="q${questionIndex}" value="${i}" style="margin-right: 10px;">
                                     ${option}
                                 </label>`
-                            ).join('')}
+                ).join('')}
                         </div>
                     </div>
                 `;
@@ -663,10 +788,10 @@
 
             // Add click handlers for options
             document.querySelectorAll('.option').forEach(option => {
-                option.addEventListener('click', function() {
+                option.addEventListener('click', function () {
                     const radio = this.querySelector('input[type="radio"]');
                     radio.checked = true;
-                    
+
                     // Remove selected class from siblings
                     this.parentNode.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
                     this.classList.add('selected');
@@ -683,11 +808,11 @@
             document.querySelectorAll('.question').forEach(question => {
                 const correctAnswer = parseInt(question.dataset.correct);
                 const selectedRadio = question.querySelector('input[type="radio"]:checked');
-                
+
                 if (selectedRadio) {
                     const selectedValue = parseInt(selectedRadio.value);
                     const selectedOption = selectedRadio.closest('.option');
-                    
+
                     if (selectedValue === correctAnswer) {
                         correct++;
                         selectedOption.style.borderColor = '#2ecc71';
@@ -713,7 +838,7 @@
         function getPeriodName(period) {
             const names = {
                 ancient: 'Filosofía Antigua',
-                medieval: 'Filosofía Medieval', 
+                medieval: 'Filosofía Medieval',
                 renaissance: 'Renacimiento',
                 modern: 'Filosofía Moderna',
                 romantic: 'Romanticismo e Idealismo',
@@ -742,4 +867,5 @@
         }, 10000);
     </script>
 </body>
+
 </html>

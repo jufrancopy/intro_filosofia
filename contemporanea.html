@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filosofía Contemporánea: Arte y Música</title>
+    <style>
+        /* Estilos de la barra de navegación */
+        .navbar {
+            background: rgba(25, 25, 50, 0.7); /* Un color azul oscuro/púrpura semi-transparente */
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #ff6b6b;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #ff6b6b;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-logo {
+            height: 60px;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-logo:hover {
+            transform: scale(1.1);
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.7;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #667eea 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 80px 0;
+            background: rgba(30, 60, 114, 0.15);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            margin-bottom: 50px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        h1 {
+            font-size: 4rem;
+            color: #ffffff;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+            animation: fadeInScale 1.2s ease-out;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-style: italic;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        .timeline {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+
+        .timeline h2 {
+            color: #ffffff;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .timeline-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .timeline-item {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .timeline-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .period-section {
+            background: rgba(255, 255, 255, 0.95);
+            margin: 40px 0;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(30, 60, 114, 0.2);
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #ffffff;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .section-content {
+            padding: 40px;
+        }
+
+        .philosopher-card {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            margin: 30px 0;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            border-left: 6px solid #667eea;
+            transition: all 0.3s ease;
+        }
+
+        .philosopher-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .philosopher-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .philosopher-name {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .philosopher-dates {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .philosopher-content {
+            padding: 30px;
+        }
+
+        .concept-box {
+            background: #e3f2fd;
+            border: 2px solid #2196f3;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .concept-box::before {
+            content: "🧠";
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: #e3f2fd;
+            padding: 0 10px;
+            font-size: 1.5rem;
+        }
+
+        .quote-box {
+            background: #f3e5fd;
+            border-left: 4px solid #9c27b0;
+            padding: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            position: relative;
+        }
+
+        .quote-box::before {
+            content: """;
+            font-size: 4rem;
+            color: #9c27b0;
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            opacity: 0.3;
+        }
+
+        .music-section {
+            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+            border: 2px solid #ff9800;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            position: relative;
+        }
+
+        .music-section::before {
+            content: "♪ ♫ ♪";
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #fff3e0;
+            padding: 0 15px;
+            color: #ff9800;
+            font-size: 1.2rem;
+        }
+
+        .music-title {
+            color: #ff9800;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .comparison-table th {
+            background: #1e3c72;
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .comparison-table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .influence-map {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .influence-connections {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .influence-node {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 25px;
+            margin: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .influence-node:hover {
+            transform: scale(1.1);
+        }
+
+        .arrow {
+            font-size: 2rem;
+            color: #1e3c72;
+            margin: 0 10px;
+        }
+
+        .interactive-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .tab-container {
+            display: flex;
+            border-bottom: 3px solid #1e3c72;
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            background: #e9ecef;
+            border: none;
+            padding: 15px 25px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            border-radius: 10px 10px 0 0;
+            margin-right: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .tab.active {
+            background: #1e3c72;
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .summary-card {
+            background: linear-gradient(135deg, #e8f5e8, #c8e6c9);
+            padding: 25px;
+            border-radius: 15px;
+            border: 2px solid #4caf50;
+            transition: transform 0.3s ease;
+        }
+
+        .summary-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .movement-section {
+            background: linear-gradient(135deg, #fce4ec, #f8bbd9);
+            border: 2px solid #e91e63;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            position: relative;
+        }
+
+        .movement-section::before {
+            content: "🎭";
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #fce4ec;
+            padding: 0 15px;
+            color: #e91e63;
+            font-size: 1.2rem;
+        }
+
+        .movement-title {
+            color: #e91e63;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-header h2 {
+                font-size: 2rem;
+            }
+            
+            .philosopher-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .influence-connections {
+                flex-direction: column;
+            }
+            
+            .arrow {
+                transform: rotate(90deg);
+            }
+            
+            .comparison-table {
+                font-size: 0.9rem;
+            }
+            
+            .tab-container {
+                flex-direction: column;
+            }
+            
+            .tab {
+                border-radius: 10px;
+                margin-bottom: 5px;
+            }
+        }
+
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(30, 60, 114, 0.3);
+            z-index: 1000;
+        }
+
+        .scroll-progress {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            width: 0%;
+            transition: width 0.1s ease;
+        }
+
+        .floating-elements {
+            position: fixed;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        .modern-symbol {
+            position: absolute;
+            font-size: 3rem;
+            color: #1e3c72;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
+        }
+
+        .floating-home-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            border: none;
+            cursor: pointer;
+        }
+
+        .floating-home-btn:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+            background: linear-gradient(135deg, #5a67d8, #667eea);
+        }
+
+        .floating-home-btn:active {
+            transform: translateY(-2px) scale(1.05);
+        }
+
+        .floating-home-btn::before {
+            content: '🏠';
+            font-size: 1.3rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @media (max-width: 768px) {
+            .floating-home-btn {
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+            
+            .floating-home-btn::before {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html">
+            <img src="logo.png" alt="Logo Filosofía" class="nav-logo">
+        </a>
+        <ul class="nav-menu">
+            <li><a href="../index.html" class="nav-link">Inicio</a></li>
+            <li><a href="../history_music_py/index.html" class="nav-link">Historia de la Música</a></li>
+            <li><a href="index.html" class="nav-link">Filosofía</a></li>
+            <li><a href="../contact.html" class="nav-link">Contacto</a></li>
+        </ul>
+    </nav>
+    <div class="scroll-indicator">
+        <div class="scroll-progress" id="scroll-progress"></div>
+    </div>
+
+    <div class="floating-elements">
+        <div class="modern-symbol" style="top: 10%; left: 5%; animation-delay: 0s;">🧠</div>
+        <div class="modern-symbol" style="top: 30%; right: 10%; animation-delay: -2s;">📱</div>
+        <div class="modern-symbol" style="bottom: 40%; left: 15%; animation-delay: -4s;">🎵</div>
+        <div class="modern-symbol" style="top: 60%; right: 20%; animation-delay: -6s;">🎬</div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>Filosofía Contemporánea</h1>
+            <p class="subtitle">El Arte y la Música en el Pensamiento Contemporáneo<br>1900 - Presente</p>
+        </header>
+
+        <div class="timeline">
+            <h2>Cronología de la Filosofía Contemporánea</h2>
+            <div class="timeline-content">
+                <div class="timeline-item">
+                    <h3>1900-1920</h3>
+                    <p>Vanguardias Artísticas<br>Crisis de la representación</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>1920-1945</h3>
+                    <p>Escuela de Frankfurt<br>Crítica de la cultura de masas</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>1945-1970</h3>
+                    <p>Existencialismo<br>Arte y autenticidad</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>1970-1990</h3>
+                    <p>Postmodernismo<br>Deconstrucción</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>1990-Presente</h3>
+                    <p>Era Digital<br>Arte y tecnología</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="period-section">
+            <div class="section-header">
+                <h2>La Escuela de Frankfurt</h2>
+                <p>Crítica de la industria cultural y el arte en la sociedad de masas</p>
+            </div>
+            <div class="section-content">
+                <div class="philosopher-card">
+                    <div class="philosopher-header">
+                        <div class="philosopher-name">Walter Benjamin</div>
+                        <div class="philosopher-dates">1892-1940</div>
+                    </div>
+                    <div class="philosopher-content">
+                        <p>Walter Benjamin revolucionó la comprensión del arte en la era moderna al analizar cómo la tecnología (especialmente la fotografía y el cine) transforma radicalmente la experiencia estética y el significado cultural del arte.</p>
+                        
+                        <div class="concept-box">
+                            <h4>La Pérdida del "Aura"</h4>
+                            <p>Benjamin identifica el "aura" como la presencia única e irrepetible de la obra de arte, su "aquí y ahora". La reproducción técnica destruye este aura al separar la obra de su contexto original. El aura se basa en:</p>
+                            <ul>
+                                <li><strong>Autenticidad:</strong> La historia y tradición que la obra carga.</li>
+                                <li><strong>Unicidad:</strong> Su existencia singular en un lugar y momento.</li>
+                                <li><strong>Distancia:</strong> La reverencia que inspira su inaccesibilidad.</li>
+                            </ul>
+                        </div>
+
+                        <div class="music-section">
+                            <h4 class="music-title">La Reproducibilidad Técnica en la Música</h4>
+                            <p>La grabación musical es el ejemplo perfecto de la pérdida del aura. Transforma la experiencia sonora de manera fundamental:</p>
+                            <table class="comparison-table">
+                                <thead>
+                                    <tr>
+                                        <th>Música Aurática (Concierto)</th>
+                                        <th>Música Reproducida (Grabación)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Evento único e irrepetible.</td>
+                                        <td>Copia perfecta e infinitamente repetible.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Presencia física del intérprete.</td>
+                                        <td>Ausencia del músico, sonido "puro".</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Contexto ritual y social.</td>
+                                        <td>Consumo privado y masivo.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="concept-box">
+                            <h4>Del Valor Cultual al Valor de Exhibición</h4>
+                            <p>La función del arte cambia drásticamente:</p>
+                            <p><strong>Valor Cultual:</strong> Función mágica/religiosa original, donde la existencia de la obra es más importante que su ser vista (ej. pinturas rupestres).</p>
+                            <p><strong>Valor de Exhibición:</strong> Nueva función del arte reproducible, orientado a la recepción masiva, donde la visibilidad y accesibilidad lo son todo.</p>
+                        </div>
+
+                        <div class="quote-box">
+                            En la época de la reproducibilidad técnica, lo que se atrofia en la obra de arte es su aura. El proceso es sintomático; su significación señala más allá del ámbito del arte.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="philosopher-card">
+                    <div class="philosopher-header">
+                        <div class="philosopher-name">Theodor Adorno</div>
+                        <div class="philosopher-dates">1903-1969</div>
+                    </div>
+                    <div class="philosopher-content">
+                        <p>Adorno desarrolló la crítica más sistemática de la industria cultural, defendiendo el arte auténtico como forma de resistencia contra la homogeneización social y la manipulación ideológica.</p>
+                        
+                        <div class="concept-box">
+                            <h4>La Industria Cultural</h4>
+                            <p>Adorno y Horkheimer acuñan este término para describir la producción en serie de bienes culturales que promueve la pasividad y el conformismo. Sus características son:</p>
+                            <ul>
+                                <li><strong>Estandarización:</strong> Fórmulas repetitivas que ocultan la uniformidad.</li>
+                                <li><strong>Pseudoindividualización:</strong> Pequeñas variaciones que dan una falsa sensación de novedad.</li>
+                                <li><strong>Manipulación:</strong> Control de la conciencia a través del entretenimiento.</li>
+                            </ul>
+                        </div>
+
+                        <div class="music-section">
+                            <h4 class="music-title">Crítica del Jazz y la Música Popular</h4>
+                            <p>Adorno veía la música popular, incluido el jazz de su época, como un producto de la industria cultural que ofrece una "falsa liberación". En contraste, defendía la música atonal de Schoenberg como un arte auténtico que resiste la comercialización y expresa las contradicciones de la sociedad moderna.</p>
+                        </div>
+
+                        <div class="quote-box">
+                            El arte auténtico es aquel que, mediante su forma, expresa el sufrimiento de la realidad social sin ofrecer falsas consolaciones ni soluciones ilusorias.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="period-section">
+            <div class="section-header">
+                <h2>Fenomenología y Existencialismo</h2>
+                <p>El arte como revelación del Ser y la experiencia auténtica</p>
+            </div>
+            <div class="section-content">
+                <div class="philosopher-card">
+                    <div class="philosopher-header">
+                        <div class="philosopher-name">Martin Heidegger</div>
+                        <div class="philosopher-dates">1889-1976</div>
+                    </div>
+                    <div class="philosopher-content">
+                        <p>Heidegger transformó la comprensión del arte al concebirlo como una forma privilegiada de revelación del Ser (Sein), superando la estética tradicional centrada en la belleza o el placer y las teorías representacionales.</p>
+                        
+                        <div class="concept-box">
+                            <h4>El Arte como Desocultamiento (Aletheia)</h4>
+                            <p>Para Heidegger, el arte no imita ni representa, sino que "pone en obra la verdad". La obra de arte es un evento donde la verdad del Ser acontece a través del conflicto entre:</p>
+                            <ul>
+                                <li><strong>Mundo:</strong> La apertura de un campo de significados y relaciones que estructura una época histórica (ej. el mundo del templo griego).</li>
+                                <li><strong>Tierra:</strong> Lo que se oculta, lo material, lo insondable que resiste la total clarificación y da soporte al mundo.</li>
+                            </ul>
+                        </div>
+
+                        <div class="music-section">
+                            <h4 class="music-title">La Música y la Temporalidad del Dasein</h4>
+                            <p>Aunque Heidegger se centró en la poesía y la pintura, su filosofía permite pensar la música como una manifestación privilegiada de la temporalidad del Dasein (ser-ahí):</p>
+                            <ul>
+                                <li><strong>Retención:</strong> El sonido pasado que aún resuena en la conciencia.</li>
+                                <li><strong>Presente:</strong> El sonido que se despliega en el ahora.</li>
+                                <li><strong>Protención:</strong> La anticipación de los sonidos por venir.</li>
+                                <li><strong>Ekstasis temporal:</strong> La música nos saca de la temporalidad cotidiana y nos pone en contacto con el fluir originario del tiempo.</li>
+                            </ul>
+                        </div>
+
+                        <div class="quote-box">
+                            El arte es el ponerse en obra de la verdad. En la obra de arte se ha puesto manos a la obra la verdad del ente.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="philosopher-card">
+                    <div class="philosopher-header">
+                        <div class="philosopher-name">Maurice Merleau-Ponty</div>
+                        <div class="philosopher-dates">1908-1961</div>
+                    </div>
+                    <div class="philosopher-content">
+                        <p>Merleau-Ponty desarrolló una fenomenología de la percepción que revolucionó la comprensión del arte como experiencia corporal y sensorial, más allá de las dicotomías tradicionales sujeto/objeto.</p>
+                        
+                        <div class="concept-box">
+                            <h4>La Percepción como Acto Creativo</h4>
+                            <p>Para Merleau-Ponty, la percepción no es pasiva sino un acto creativo en el que el cuerpo y el mundo se entrelazan. El arte explora esta "carne del mundo":</p>
+                            <ul>
+                                <li><strong>Cuerpo vivido:</strong> El cuerpo como sujeto de la percepción, no como un objeto.</li>
+                                <li><strong>Intercorporeidad:</strong> La comunicación prerreflexiva entre los cuerpos.</li>
+                                <li><strong>Quiasmo:</strong> El entrelazamiento inseparable entre el que ve y lo visto, el que toca y lo tocado.</li>
+                            </ul>
+                        </div>
+
+                        <div class="music-section">
+                            <h4 class="music-title">Fenomenología de la Escucha Musical</h4>
+                            <p>La música es una experiencia corporal total. No la escuchamos "con los oídos", sino con todo nuestro ser. El cuerpo se convierte en un resonador que vive la música:</p>
+                            <ul>
+                                <li><strong>Resonancia corporal:</strong> El cuerpo vibra con la música, siente las tensiones y resoluciones.</li>
+                                <li><strong>Movimiento implícito:</strong> La música genera un movimiento interno, una danza virtual en el oyente.</li>
+                                <li><strong>Espacialización:</strong> La música no está "en" el espacio, sino que crea y habita su propio espacio sonoro.</li>
+                            </ul>
+                        </div>
+
+                        <div class="quote-box">
+                            La música no está 'en' el espacio: ella habita el espacio. No está 'en' el tiempo: ella articula el tiempo desde dentro.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="period-section">
+            <div class="section-header">
+                <h2>Postmodernismo y Deconstrucción</h2>
+                <p>Cuestionamiento de las categorías tradicionales del arte</p>
+            </div>
+            <div class="section-content">
+                <div class="philosopher-card">
+                    <div class="philosopher-header">
+                        <div class="philosopher-name">Jacques Derrida</div>
+                        <div class="philosopher-dates">1930-2004</div>
+                    </div>
+                    <div class="philosopher-content">
+                        <p>Derrida revolucionó la comprensión del arte y la música al deconstruir las oposiciones tradicionales y mostrar cómo todo texto (incluyendo el musical) está atravesado por la différance.</p>
+                        
+                        <div class="concept-box">
+                            <h4>Deconstrucción de las Oposiciones Estéticas</h4>
+                            <p>Derrida cuestiona las dicotomías tradicionales:</p>
+                            <ul>
+                                <li><strong>Arte/No-arte:</strong> Los límites son construidos, no naturales</li>
+                                <li><strong>Original/Copia:</strong> La "originalidad" depende de la repetición</li>
+                                <li><strong>Presencia/Ausencia:</strong> La presencia está siempre diferida</li>
+                                <li><strong>Interior/Exterior:</strong> El sentido viene siempre de afuera</li>
+                            </ul>
+                        </div>
+
+                        <div class="music-section">
+                            <h4 class="music-title">La Música como Escritura Sonora</h4>
+                            <p><strong>Archi-escritura Musical:</strong></p>
+                            
+                            <div style="margin: 20px 0; padding: 20px; background: #fff3e0; border-radius: 10px;">
+                                <h5>Différance en la Música</h5>
+                                <p>La música manifiesta la différance de manera paradigmática:</p>
+                                <ul>
+                                    <li><strong>Diferencia:</strong> Cada sonido se define por diferencia con otros</li>
+                                    <li><strong>Diferimiento:</strong> El sentido musical siempre está por venir</li>
+                                    <li><strong>Repetición:</strong> Cada interpretación es diferente</li>
+                                    <li><strong>Iterabilidad:</strong> La música existe en su repetición diferencial</li>
+                                </ul>
+                            </div>
+
+                            <p><strong>Crítica de la Presencia Plena:</strong> La música revela que no hay presencia plena del significado. Cada nota existe en relación con las que la preceden y siguen, nunca en sí misma.</p>
+                        </div>
+
+                        <div class="concept-box">
+                            <h4>El Texto Musical</h4>
+                            <p>Para Derrida, la música es un "texto" en sentido amplio:</p>
+                            <p><strong>Intertextualidad:</strong> Toda música remite a otras músicas</p>
+                            <p><strong>Diseminación:</strong> El sentido se dispersa y multiplica</p>
+                            <p><strong>Indecidibilidad:</strong> No hay interpretación única y definitiva</p>
+                        </div>
+
+                        <div class="quote-box">
+                            No hay nada fuera del texto musical. La música es escritura, différance, juego de diferencias sin centro fijo.
+                        </quote>
+                    </div>
+                </div>
+
+                <div class="philosopher-card">
+                    <div class="philosopher-header">
+                        <div class="philosopher-name">Jean Baudrillard</div>
+                        <div class="philosopher-dates">1929-2007</div>
+                    </div>
+                    <div class="philosopher-content">
+                        <p>Baudrillard analizó cómo en la sociedad postmoderna el arte entra en la era de la simulación, donde las copias preceden a los originales y la realidad se disuelve en simulacros.</p>
+                        
+                        <div class="concept-box">
+                            <h4>Los Cuatro Estadios del Simulacro</h4>
+                            <p>Aplicados al arte y la música:</p>
+                            <ul>
+                                <li><strong>1º:</strong> El arte refleja una realidad básica (arte clásico)</li>
+                                <li><strong>2º:</strong> El arte enmascara y desnaturaliza una realidad (arte moderno)</li>
+                                <li><strong>3º:</strong> El arte enmascara la ausencia de realidad (arte de vanguardia)</li>
+                                <li><strong>4º:</strong> El arte no tiene relación con realidad alguna (simulacro puro)</li>
+                            </ul>
+                        </div>
+
+                        <div class="music-section">
+                            <h4 class="music-title">La Música en la Era del Simulacro</h4>
+                            <p><strong>Ejemplos de Simulacros Musicales:</strong></p>
+                            <ul>
+                                <li><strong>Sampling:</strong> Música creada a partir de fragmentos de otras músicas</li>
+                                <li><strong>Remix:</strong> Versiones que superan en popularidad a los "originales"</li>
+                                <li><strong>Música sintética:</strong> Sonidos que nunca existieron "naturalmente"</li>
+                                <li><strong>Realidad virtual:</strong> Conciertos y músicos completamente digitales</li>
+                            </ul>
+                        </div>
+
+                        <div class="quote-box">
+                            En la era de la reproducción digital, el original musical se convierte en un simulacro de sí mismo.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="period-section">
+            <div class="section-header">
+                <h2>Filosofía Contemporánea del Arte Digital</h2>
+                <p>Nuevos paradigmas estéticos en la era tecnológica</p>
+            </div>
+            <div class="section-content">
+                <div class="philosopher-card">
+                    <div class="philosopher-header">
+                        <div class="philosopher-name">Vilém Flusser</div>
+                        <div class="philosopher-dates">1920-1991</div>
+                    </div>
+                    <div class="philosopher-content">
+                        <p>Flusser anticipó la revolución digital y analizó cómo las nuevas tecnologías transforman radicalmente la creación, distribución y recepción del arte.</p>
+                        
+                        <div class="concept-box">
+                            <h4>Imágenes Técnicas vs. Imágenes Tradicionales</h4>
+                            <p>Flusser distingue dos tipos fundamentales de imágenes:</p>
+                            <ul>
+                                <li><strong>Imágenes tradicionales:</strong> Abstracciones del mundo concreto</li>
+                                <li><strong>Imágenes técnicas:</strong> Visualizaciones de conceptos abstractos</li>
+                                <li><strong>Aparatos:</strong> Dispositivos que producen imágenes según programas</li>
+                                <li><strong>Programación:</strong> El arte como exploración de posibilidades programadas</li>
+                            </ul>
+                        </div>
+
+                        <div class="music-section">
+                            <h4 class="music-title">Música Electrónica y Aparatos Sonoros</h4>
+                            <p><strong>La Revolución de los Aparatos Musicales:</strong></p>
+                            <ul>
+                                <li><strong>Sintetizadores:</strong> Aparatos que generan sonidos según programas</li>
+                                <li><strong>Samplers:</strong> Dispositivos de manipulación sonora</li>
+                                <li><strong>Software musical:</strong> Programas como instrumentos</li>
+                                <li><strong>IA musical:</strong> Algoritmos que componen automáticamente</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="philosopher-card">
+                    <div class="philosopher-header">
+                        <div class="philosopher-name">Arthur Danto</div>
+                        <div class="philosopher-dates">1924-2013</div>
+                    </div>
+                    <div class="philosopher-content">
+                        <p>Danto propuso que el arte contemporáneo ha llegado al "fin de la historia del arte", no porque el arte haya terminado, sino porque ya no existe una narrativa única que defina su progreso.</p>
+                        
+                        <div class="concept-box">
+                            <h4>El Fin de la Historia del Arte</h4>
+                            <p>Características de la era post-histórica del arte:</p>
+                            <ul>
+                                <li><strong>Pluralismo:</strong> Coexistencia de múltiples estilos y enfoques</li>
+                                <li><strong>Teoría constitutiva:</strong> El arte necesita teoría para ser arte</li>
+                                <li><strong>Institucionalización:</strong> El mundo del arte determina qué es arte</li>
+                                <li><strong>Indiscernibilidad:</strong> Objetos idénticos pueden ser arte o no serlo</li>
+                            </ul>
+                        </div>
+
+                        <div class="music-section">
+                            <h4 class="music-title">Pluralismo Musical Contemporáneo</h4>
+                            <p>En la era post-histórica musical coexisten:</p>
+                            <table class="comparison-table">
+                                <tr>
+                                    <th>Tradición</th>
+                                    <th>Características</th>
+                                    <th>Legitimidad</th>
+                                </tr>
+                                <tr>
+                                    <td>Música clásica</td>
+                                    <td>Tradición europea culta</td>
+                                    <td>Institucional/académica</td>
+                                </tr>
+                                <tr>
+                                    <td>Músicas populares</td>
+                                    <td>Diversidad de géneros masivos</td>
+                                    <td>Comercial/social</td>
+                                </tr>
+                                <tr>
+                                    <td>Música experimental</td>
+                                    <td>Exploración de límites sonoros</td>
+                                    <td>Vanguardista/conceptual</td>
+                                </tr>
+                                <tr>
+                                    <td>Músicas del mundo</td>
+                                    <td>Tradiciones no occidentales</td>
+                                    <td>Cultural/etnomusicológica</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="influence-map">
+            <h2>Red de Influencias Contemporáneas</h2>
+            <div class="influence-connections">
+                <div class="influence-node">Benjamin<br><small>Reproducibilidad técnica</small></div>
+                <div class="arrow">→</div>
+                <div class="influence-node">Adorno<br><small>Industria cultural</small></div>
+                <div class="arrow">→</div>
+                <div class="influence-node">Heidegger<br><small>Arte como verdad</small></div>
+                <div class="arrow">→</div>
+                <div class="influence-node">Derrida<br><small>Deconstrucción</small></div>
+            </div>
+        </div>
+
+        <div class="interactive-section">
+            <h2>Análisis Comparativo de Teorías Contemporáneas</h2>
+            <div class="tab-container">
+                <button class="tab active" onclick="showTab('tecnologia')">Tecnología y Arte</button>
+                <button class="tab" onclick="showTab('masas')">Cultura de Masas</button>
+                <button class="tab" onclick="showTab('digital')">Era Digital</button>
+            </div>
+
+            <div id="tecnologia" class="tab-content active">
+                <div class="summary-grid">
+                    <div class="summary-card">
+                        <h3>Walter Benjamin</h3>
+                        <p>La tecnología transforma el arte eliminando su aura, pero abre nuevas posibilidades democráticas y estéticas.</p>
+                    </div>
+                    <div class="summary-card">
+                        <h3>Vilém Flusser</h3>
+                        <p>Los aparatos técnicos crean un nuevo tipo de arte basado en la exploración de programas y posibilidades.</p>
+                    </div>
+                    <div class="summary-card">
+                        <h3>Marshall McLuhan</h3>
+                        <p>"El medio es el mensaje": cada tecnología crea nuevas formas de percepción y experiencia estética.</p>
+                    </div>
+                    <div class="summary-card">
+                        <h3>Jean Baudrillard</h3>
+                        <p>La tecnología lleva al arte hacia la era del simulacro, donde la copia precede al original.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="masas" class="tab-content">
+                <h3>Perspectivas sobre la Cultura de Masas</h3>
+                <table class="comparison-table">
+                    <tr>
+                        <th>Filósofo</th>
+                        <th>Posición</th>
+                        <th>Argumentos</th>
+                        <th>Impacto en la Música</th>
+                    </tr>
+                    <tr>
+                        <td>Adorno</td>
+                        <td>Crítica negativa</td>
+                        <td>Estandarización, manipulación ideológica</td>
+                        <td>Jazz como falsa liberación</td>
+                    </tr>
+                    <tr>
+                        <td>Benjamin</td>
+                        <td>Ambivalente</td>
+                        <td>Pérdida del aura, pero democratización</td>
+                        <td>Grabación como nueva forma estética</td>
+                    </tr>
+                    <tr>
+                        <td>Eco</td>
+                        <td>Integracionista</td>
+                        <td>Posibilidad de obra abierta en medios masivos</td>
+                        <td>Música popular como arte legítimo</td>
+                    </tr>
+                    <tr>
+                        <td>Danto</td>
+                        <td>Pluralista</td>
+                        <td>Todos los estilos tienen legitimidad</td>
+                        <td>Coexistencia de todos los géneros</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div id="digital" class="tab-content">
+                <h3>Desafíos de la Era Digital</h3>
+                <div class="summary-grid">
+                    <div class="summary-card">
+                        <h3>Interactividad</h3>
+                        <p>El arte digital permite nuevas formas de participación del público, cuestionando la separación tradicional entre creador y receptor.</p>
+                    </div>
+                    <div class="summary-card">
+                        <h3>Inmaterialidad</h3>
+                        <p>El arte digital existe como información, planteando nuevas preguntas sobre la materialidad y permanencia de la obra.</p>
+                    </div>
+                    <div class="summary-card">
+                        <h3>Algoritmos</h3>
+                        <p>La inteligencia artificial puede crear arte autónomamente, cuestionando nociones tradicionales de autoría y creatividad.</p>
+                    </div>
+                    <div class="summary-card">
+                        <h3>Redes</h3>
+                        <p>Internet crea nuevas formas de distribución y creación colaborativa que transforman la economía del arte.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="movement-section">
+            <h4 class="movement-title">Movimientos Estéticos Contemporáneos</h4>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 20px 0;">
+                <div style="background: #e8f5e8; padding: 20px; border-radius: 10px;">
+                    <h5>Arte Conceptual</h5>
+                    <p>La idea prima sobre la realización material. Influenciado por Duchamp y teorizado por Danto.</p>
+                </div>
+                
+                <div style="background: #fff3e0; padding: 20px; border-radius: 10px;">
+                    <h5>Performance</h5>
+                    <p>Arte del cuerpo y la acción en tiempo real. Relacionado con la fenomenología de Merleau-Ponty.</p>
+                </div>
+                
+                <div style="background: #f3e5fd; padding: 20px; border-radius: 10px;">
+                    <h5>Arte Digital</h5>
+                    <p>Exploración de las posibilidades de los medios digitales. Anticipado por Flusser.</p>
+                </div>
+                
+                <div style="background: #e3f2fd; padding: 20px; border-radius: 10px;">
+                    <h5>Arte Relacional</h5>
+                    <p>Arte que crea relaciones sociales. Terorizado por Nicolas Bourriaud.</p>
+                </div>
+            </div>
+        </div>
+
+        <footer style="text-align: center; padding: 40px; background: rgba(30, 60, 114, 0.1); border-radius: 15px; margin-top: 40px;">
+            <h3 style="color: #1e3c72; margin-bottom: 20px;">Conclusión</h3>
+            <p style="font-size: 1.1rem; color: #2c3e50; max-width: 800px; margin: 0 auto;">
+                La filosofía contemporánea del arte ha revolucionado nuestra comprensión de la experiencia estética. 
+                Desde la crítica de Benjamin a la industria cultural hasta los desafíos del arte digital, 
+                estos pensadores nos han equipado con herramientas conceptuales para navegar 
+                la complejidad del arte en la era contemporánea.
+            </p>
+        </footer>
+        
+        <a href="index.html" class="floating-home-btn" title="Volver al inicio"></a>
+    </div>
+
+    <script>
+        // Barra de progreso de scroll
+        window.addEventListener('scroll', () => {
+            const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            document.getElementById('scroll-progress').style.width = scrolled + '%';
+        });
+
+        // Función para mostrar pestañas
+        function showTab(tabName) {
+            // Ocultar todos los contenidos de pestaña
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remover clase active de todas las pestañas
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Mostrar el contenido seleccionado
+            document.getElementById(tabName).classList.add('active');
+            
+            // Activar la pestaña correspondiente
+            event.target.classList.add('active');
+        }
+
+        // Animación de aparición progresiva
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Aplicar animación a las tarjetas de filósofos
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.philosopher-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'all 0.6s ease';
+                observer.observe(card);
+            });
+        });
+
+        // Efectos de hover dinámicos
+        document.querySelectorAll('.philosopher-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateX(15px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateX(0) scale(1)';
+            });
+        });
+
+        // Animación de elementos flotantes
+        document.querySelectorAll('.modern-symbol').forEach((symbol, index) => {
+            symbol.style.animationDelay = `${index * 2}s`;
+            symbol.addEventListener('mouseover', () => {
+                symbol.style.transform = 'scale(1.5) rotate(360deg)';
+                symbol.style.transition = 'all 0.5s ease';
+            });
+            
+            symbol.addEventListener('mouseout', () => {
+                symbol.style.transform = 'scale(1) rotate(0deg)';
+            });
+        });
+    </script>
+</body>
+</html>

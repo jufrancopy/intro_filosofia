@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación: Filosofía Medieval</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.7;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: #34495e;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .user-info-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .user-info-form input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .user-info-form input:focus {
+            outline: none;
+            border-color: #4169E1;
+        }
+
+        .question {
+            background: #f9f9f9;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            border-left: 5px solid #4169E1;
+        }
+
+        .question p {
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .options label {
+            display: block;
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .options label:hover {
+            background-color: #dee2e6;
+            transform: translateX(5px);
+        }
+
+        .options input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .submit-btn, .download-btn {
+            display: block;
+            width: 100%;
+            padding: 18px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(135deg, #4169E1, #2F4F4F);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 30px;
+        }
+
+        .submit-btn:hover, .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(65, 105, 225, 0.4);
+        }
+
+        .result-container {
+            text-align: center;
+            padding: 30px;
+            margin-top: 40px;
+            border-radius: 15px;
+            background: #f8f9fa;
+            border: 2px solid #4169E1;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .download-btn {
+            display: none; /* Oculto por defecto */
+            background: linear-gradient(135deg, #28a745, #218838);
+        }
+        
+        .download-btn:hover {
+            box-shadow: 0 10px 20px rgba(40, 167, 69, 0.4);
+        }
+
+        .floating-home-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #4169E1, #2F4F4F);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 8px 25px rgba(65, 105, 225, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .floating-home-btn:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 15px 40px rgba(65, 105, 225, 0.6);
+        }
+
+        .floating-home-btn::before {
+            content: '🏠';
+            font-size: 1.3rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Evaluación de Filosofía Medieval</h1>
+            <p>El Arte y la Música en el Pensamiento Cristiano</p>
+        </header>
+
+        <form id="userInfo" class="user-info-form">
+            <input type="text" id="nombre" name="nombre" placeholder="Nombre(s)" required>
+            <input type="text" id="apellido" name="apellido" placeholder="Apellido(s)" required>
+            <input type="text" id="carrera" name="carrera" placeholder="Carrera o Instrumento" required>
+        </form>
+
+        <div id="quiz-container"></div>
+
+        <button id="submit-btn" class="submit-btn">Calcular Resultados</button>
+
+        <div id="result-container" style="display: none;"></div>
+        
+        <button id="download-btn" class="download-btn">Descargar Certificado de Resultados</button>
+    </div>
+
+    <a href="index.html" class="floating-home-btn" title="Volver al inicio"></a>
+
+    <canvas id="result-canvas" width="800" height="600" style="display:none;"></canvas>
+
+    <script>
+        const quizData = [
+            {
+                question: "¿Qué filósofo definió la música como 'scientia bene modulandi' (la ciencia del buen modular) en su obra 'De Musica'?",
+                options: ["Santo Tomás de Aquino", "Boecio", "San Agustín de Hipona", "Pseudo-Dionisio"],
+                answer: 2
+            },
+            {
+                question: "Las tres condiciones de la belleza según Santo Tomás de Aquino son:",
+                options: ["Fe, Esperanza y Caridad", "Ritmo, Melodía y Armonía", "Integritas, Proportio y Claritas", "Mimesis, Catarsis y Anamnesis"],
+                answer: 2
+            },
+            {
+                question: "La estética de la luz divina, que concibe la belleza como irradiación de lo divino e influyó en el arte gótico, fue desarrollada por:",
+                options: ["San Agustín", "Pseudo-Dionisio Areopagita", "Santo Tomás de Aquino", "Guido de Arezzo"],
+                answer: 1
+            },
+            {
+                question: "Para San Agustín, la belleza musical en la tierra es un 'vestigium Dei', que significa:",
+                options: ["Una ciencia matemática", "Un eco de la armonía celestial", "Una huella de la belleza divina", "Un placer para los sentidos"],
+                answer: 2
+            },
+            {
+                question: "Santo Tomás de Aquino integró la filosofía de qué pensador antiguo en su teología cristiana para explicar la belleza?",
+                options: ["Platón", "Aristóteles", "Pitágoras", "Plotino"],
+                answer: 1
+            },
+            {
+                question: "La idea de que la música terrenal debe imitar la armonía de los coros angélicos es central en el pensamiento de:",
+                options: ["Pseudo-Dionisio Areopagita", "San Agustín", "Boecio", "Santo Tomás de Aquino"],
+                answer: 0
+            },
+            {
+                question: "En la estética de Santo Tomás, la 'Claritas' se refiere a:",
+                options: ["La proporción entre las partes", "La completitud de la forma", "La luminosidad que hace resplandecer la forma", "La corrección teológica"],
+                answer: 2
+            },
+            {
+                question: "¿Qué autor medieval es fundamental por transmitir la teoría musical griega al mundo latino con su obra 'De Institutione Musica'?",
+                options: ["Casiodoro", "San Gregorio Magno", "Boecio", "Alcuino de York"],
+                answer: 2
+            },
+            {
+                question: "El proceso anagógico, donde los elementos musicales elevan el espíritu a realidades superiores, es un concepto clave en:",
+                options: ["La Summa Theologiae de Tomás de Aquino", "Las Confesiones de San Agustín", "La obra de Pseudo-Dionisio", "El Ars Nova"],
+                answer: 2
+            },
+            {
+                question: "San Agustín, en 'De Musica', describe una ascensión espiritual que va desde el placer sensible hasta la contemplación de:",
+                options: ["La habilidad del músico", "La Belleza eterna e inmutable en Dios", "La estructura matemática del cosmos", "El silencio absoluto"],
+                answer: 1
+            },
+            {
+                question: "La filosofía tomista influyó profundamente en el desarrollo de:",
+                options: ["La música profana de los trovadores", "El canto gregoriano y la polifonía sacra", "La música militar", "La danza cortesana"],
+                answer: 1
+            },
+            {
+                question: "La 'vía negativa musical', que sugiere que la música más perfecta conduce al silencio contemplativo, es una idea de:",
+                options: ["Santo Tomás de Aquino", "San Agustín", "Guillermo de Ockham", "Pseudo-Dionisio Areopagita"],
+                answer: 3
+            },
+            {
+                question: "¿Cuál de los 'seis géneros de números musicales' de San Agustín corresponde a los que son conservados en la memoria?",
+                options: ["Números sonantes", "Números progressores", "Números recordabiles", "Números judiciales"],
+                answer: 2
+            },
+            {
+                question: "La concepción de las catedrales góticas como 'instrumentos musicales gigantescos' se inspira en la estética de:",
+                options: ["San Agustín", "Santo Tomás de Aquino", "Pseudo-Dionisio", "Boecio"],
+                answer: 2
+            },
+            {
+                question: "El 'Ars Nova' del siglo XIV representó:",
+                options: ["Una confirmación de las reglas de San Agustín", "Un retorno a la música de la antigua Grecia", "Una crisis del pensamiento musical medieval con nuevas concepciones rítmicas", "La prohibición de la polifonía"],
+                answer: 2
+            }
+        ];
+
+        const quizContainer = document.getElementById('quiz-container');
+        const submitBtn = document.getElementById('submit-btn');
+        const resultContainer = document.getElementById('result-container');
+        const downloadBtn = document.getElementById('download-btn');
+        const userInfoForm = document.getElementById('userInfo');
+
+        function buildQuiz() {
+            quizData.forEach((currentQuestion, questionNumber) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.classList.add('question');
+
+                const questionText = document.createElement('p');
+                questionText.innerText = `${questionNumber + 1}. ${currentQuestion.question}`;
+                questionDiv.appendChild(questionText);
+
+                const optionsDiv = document.createElement('div');
+                optionsDiv.classList.add('options');
+
+                currentQuestion.options.forEach((option, index) => {
+                    const label = document.createElement('label');
+                    const radio = document.createElement('input');
+                    radio.type = 'radio';
+                    radio.name = `question${questionNumber}`;
+                    radio.value = index;
+                    label.appendChild(radio);
+                    label.append(option);
+                    optionsDiv.appendChild(label);
+                });
+
+                questionDiv.appendChild(optionsDiv);
+                quizContainer.appendChild(questionDiv);
+            });
+        }
+
+        function showResults() {
+            if (!userInfoForm.checkValidity()) {
+                alert('Por favor, completa todos tus datos antes de continuar.');
+                return;
+            }
+
+            const answerContainers = quizContainer.querySelectorAll('.options');
+            let score = 0;
+
+            quizData.forEach((currentQuestion, questionNumber) => {
+                const answerContainer = answerContainers[questionNumber];
+                const selector = `input[name=question${questionNumber}]:checked`;
+                const userAnswer = (answerContainer.querySelector(selector) || {}).value;
+
+                if (userAnswer == currentQuestion.answer) {
+                    score++;
+                    answerContainers[questionNumber].parentNode.style.borderColor = '#28a745';
+                } else {
+                    answerContainers[questionNumber].parentNode.style.borderColor = '#dc3545';
+                }
+            });
+
+            resultContainer.innerHTML = `Tu puntaje es: ${score} de 15`;
+            resultContainer.style.display = 'block';
+            downloadBtn.style.display = 'block';
+            submitBtn.style.display = 'none';
+        }
+        
+        function downloadResultImage() {
+            const canvas = document.getElementById('result-canvas');
+            const ctx = canvas.getContext('2d');
+            
+            const nombre = document.getElementById('nombre').value;
+            const apellido = document.getElementById('apellido').value;
+            const carrera = document.getElementById('carrera').value;
+            const score = (resultContainer.innerHTML.match(/(\d+)/) || [])[0] || '0';
+
+            // Fondo
+            const grd = ctx.createLinearGradient(0, 0, 800, 600);
+            grd.addColorStop(0, '#a1c4fd');
+            grd.addColorStop(1, '#c2e9fb');
+            ctx.fillStyle = grd;
+            ctx.fillRect(0, 0, 800, 600);
+
+            // Título
+            ctx.fillStyle = '#2c3e50';
+            ctx.font = 'bold 48px Georgia';
+            ctx.textAlign = 'center';
+            ctx.fillText('Certificado de Evaluación', 400, 100);
+            
+            ctx.font = '32px Georgia';
+            ctx.fillText('Filosofía Medieval', 400, 150);
+
+            // Línea decorativa
+            ctx.strokeStyle = '#2c3e50';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(100, 180);
+            ctx.lineTo(700, 180);
+            ctx.stroke();
+
+            // Datos del estudiante
+            ctx.fillStyle = '#34495e';
+            ctx.font = '28px Georgia';
+            ctx.textAlign = 'left';
+            ctx.fillText(`Estudiante: ${nombre} ${apellido}`, 100, 250);
+            ctx.fillText(`Carrera/Instrumento: ${carrera}`, 100, 300);
+
+            // Resultado
+            ctx.fillStyle = '#2c3e50';
+            ctx.font = 'bold 72px Georgia';
+            ctx.textAlign = 'center';
+            ctx.fillText('Calificación Obtenida', 400, 420);
+            
+            ctx.fillStyle = '#4169E1';
+            ctx.font = 'bold 90px Georgia';
+            ctx.fillText(`${score}/15`, 400, 520);
+
+            // Descargar imagen
+            const link = document.createElement('a');
+            link.download = `Certificado_Medieval_${apellido}_${nombre}.png`;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+
+        buildQuiz();
+        submitBtn.addEventListener('click', showResults);
+        downloadBtn.addEventListener('click', downloadResultImage);
+    </script>
+</body>
+</html>

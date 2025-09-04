@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación: Filosofía Antigua</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.7;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: #34495e;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .user-info-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .user-info-form input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .user-info-form input:focus {
+            outline: none;
+            border-color: #DAA520;
+        }
+
+        .question {
+            background: #f9f9f9;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            border-left: 5px solid #DAA520;
+        }
+
+        .question p {
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .options label {
+            display: block;
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .options label:hover {
+            background-color: #dee2e6;
+            transform: translateX(5px);
+        }
+
+        .options input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .submit-btn, .download-btn {
+            display: block;
+            width: 100%;
+            padding: 18px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(135deg, #8B4513, #A0522D);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 30px;
+        }
+
+        .submit-btn:hover, .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(139, 69, 19, 0.4);
+        }
+
+        .result-container {
+            text-align: center;
+            padding: 30px;
+            margin-top: 40px;
+            border-radius: 15px;
+            background: #f8f9fa;
+            border: 2px solid #8B4513;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .download-btn {
+            display: none; /* Oculto por defecto */
+            background: linear-gradient(135deg, #28a745, #218838);
+        }
+        
+        .download-btn:hover {
+            box-shadow: 0 10px 20px rgba(40, 167, 69, 0.4);
+        }
+
+        .floating-home-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #8B4513, #A0522D);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 8px 25px rgba(139, 69, 19, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .floating-home-btn:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 15px 40px rgba(139, 69, 19, 0.6);
+        }
+
+        .floating-home-btn::before {
+            content: '🏠';
+            font-size: 1.3rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Evaluación de Filosofía Antigua</h1>
+            <p>El Arte y la Música en el Pensamiento Clásico</p>
+        </header>
+
+        <form id="userInfo" class="user-info-form">
+            <input type="text" id="nombre" name="nombre" placeholder="Nombre(s)" required>
+            <input type="text" id="apellido" name="apellido" placeholder="Apellido(s)" required>
+            <input type="text" id="carrera" name="carrera" placeholder="Carrera o Instrumento" required>
+        </form>
+
+        <div id="quiz-container"></div>
+
+        <button id="submit-btn" class="submit-btn">Calcular Resultados</button>
+
+        <div id="result-container" style="display: none;"></div>
+        
+        <button id="download-btn" class="download-btn">Descargar Certificado de Resultados</button>
+    </div>
+
+    <a href="index.html" class="floating-home-btn" title="Volver al inicio"></a>
+
+    <canvas id="result-canvas" width="800" height="600" style="display:none;"></canvas>
+
+    <script>
+        const quizData = [
+            {
+                question: "¿Qué filósofo presocrático estableció que la belleza musical se basa en proporciones matemáticas?",
+                options: ["Heráclito", "Pitágoras", "Platón", "Tales de Mileto"],
+                answer: 1
+            },
+            {
+                question: "Según Platón, el arte es una 'imitación de imitaciones' porque:",
+                options: ["El arte imita la copia imperfecta que es el mundo sensible", "Los artistas no tienen habilidad", "El arte es una forma superior de conocimiento", "La imitación es el objetivo final del arte"],
+                answer: 0
+            },
+            {
+                question: "El concepto de 'Catarsis', o purificación emocional a través del arte, fue desarrollado principalmente por:",
+                options: ["Platón", "Sócrates", "Aristóteles", "Epicuro"],
+                answer: 2
+            },
+            {
+                question: "En 'La República' de Platón, ¿qué modo musical era rechazado para la educación de los guardianes por considerarse que producía 'molicie y debilidad'?",
+                options: ["Dórico", "Frigio", "Jónico/Lidio", "Eólico"],
+                answer: 2
+            },
+            {
+                question: "La 'Armonía de los Opuestos', que compara la estructura del cosmos con la tensión de una lira, es una idea de:",
+                options: ["Pitágoras", "Heráclito", "Aristóteles", "Plotino"],
+                answer: 1
+            },
+            {
+                question: "Aristóteles consideraba que la imitación (mimesis) era:",
+                options: ["Un alejamiento de la verdad", "Un instinto natural y una forma de aprendizaje", "Peligrosa para la estabilidad del estado", "Exclusiva de los dioses"],
+                answer: 1
+            },
+            {
+                question: "La filosofía que busca la 'Ataraxia' (tranquilidad del alma) y prefiere música suave que proporcione paz mental es la de:",
+                options: ["Los Estoicos", "Los Cínicos", "Los Neoplatónicos", "Epicuro"],
+                answer: 3
+            },
+            {
+                question: "Plotino, en su filosofía neoplatónica, supera la crítica de Platón al arte argumentando que el verdadero artista:",
+                options: ["Copia fielmente la naturaleza", "Se remonta a las Ideas mismas para crear", "Debe enfocarse solo en la belleza matemática", "Tiene que ser también un filósofo"],
+                answer: 1
+            },
+            {
+                question: "¿Cuál de las siguientes NO es una de las funciones de la música según Aristóteles?",
+                options: ["Educativa", "Catártica", "Recreativa", "Económica"],
+                answer: 3
+            },
+            {
+                question: "La idea de que la belleza es el 'resplandor de la verdad' y despierta el recuerdo (anamnesis) del mundo de las Ideas pertenece a:",
+                options: ["Aristóteles", "Platón", "Heráclito", "Los Estoicos"],
+                answer: 1
+            },
+            {
+                question: "Los Estoicos sostenían que el arte verdadero debe, sobre todo, ser:",
+                options: ["Placentero", "Original", "Moral y virtuoso", "Complejo"],
+                answer: 2
+            },
+            {
+                question: "La relación matemática 3:2, descubierta por los pitagóricos, corresponde al intervalo musical de:",
+                options: ["La Octava", "La Cuarta", "La Quinta", "La Tercera"],
+                answer: 2
+            },
+            {
+                question: "Según Plotino, la música es una vía de ascensión espiritual hacia:",
+                options: ["La Razón Universal (Logos)", "El placer moderado", "La virtud cívica", "Lo Uno"],
+                answer: 3
+            },
+            {
+                question: "En la clasificación de las artes de Aristóteles, ¿cuál es el 'medio de imitación' de la música?",
+                options: ["Lenguaje y color", "Movimiento y forma", "Sonido y ritmo", "Luz y sombra"],
+                answer: 2
+            },
+            {
+                question: "El concepto de 'epistrophé' (retorno) en la filosofía de Plotino se ve facilitado por la música porque esta:",
+                options: ["Genera pasiones violentas", "Despierta en el alma el recuerdo de su origen divino", "Es una ciencia exacta como la matemática", "Proporciona una relajación noble"],
+                answer: 1
+            }
+        ];
+
+        const quizContainer = document.getElementById('quiz-container');
+        const submitBtn = document.getElementById('submit-btn');
+        const resultContainer = document.getElementById('result-container');
+        const downloadBtn = document.getElementById('download-btn');
+        const userInfoForm = document.getElementById('userInfo');
+
+        function buildQuiz() {
+            quizData.forEach((currentQuestion, questionNumber) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.classList.add('question');
+
+                const questionText = document.createElement('p');
+                questionText.innerText = `${questionNumber + 1}. ${currentQuestion.question}`;
+                questionDiv.appendChild(questionText);
+
+                const optionsDiv = document.createElement('div');
+                optionsDiv.classList.add('options');
+
+                currentQuestion.options.forEach((option, index) => {
+                    const label = document.createElement('label');
+                    const radio = document.createElement('input');
+                    radio.type = 'radio';
+                    radio.name = `question${questionNumber}`;
+                    radio.value = index;
+                    label.appendChild(radio);
+                    label.append(option);
+                    optionsDiv.appendChild(label);
+                });
+
+                questionDiv.appendChild(optionsDiv);
+                quizContainer.appendChild(questionDiv);
+            });
+        }
+
+        function showResults() {
+            if (!userInfoForm.checkValidity()) {
+                alert('Por favor, completa todos tus datos antes de continuar.');
+                return;
+            }
+
+            const answerContainers = quizContainer.querySelectorAll('.options');
+            let score = 0;
+
+            quizData.forEach((currentQuestion, questionNumber) => {
+                const answerContainer = answerContainers[questionNumber];
+                const selector = `input[name=question${questionNumber}]:checked`;
+                const userAnswer = (answerContainer.querySelector(selector) || {}).value;
+
+                if (userAnswer == currentQuestion.answer) {
+                    score++;
+                    answerContainers[questionNumber].parentNode.style.borderColor = '#28a745';
+                } else {
+                    answerContainers[questionNumber].parentNode.style.borderColor = '#dc3545';
+                }
+            });
+
+            resultContainer.innerHTML = `Tu puntaje es: ${score} de 15`;
+            resultContainer.style.display = 'block';
+            downloadBtn.style.display = 'block';
+            submitBtn.style.display = 'none';
+        }
+        
+        function downloadResultImage() {
+            const canvas = document.getElementById('result-canvas');
+            const ctx = canvas.getContext('2d');
+            
+            const nombre = document.getElementById('nombre').value;
+            const apellido = document.getElementById('apellido').value;
+            const carrera = document.getElementById('carrera').value;
+            const score = (resultContainer.innerHTML.match(/(\d+)/) || [])[0] || '0';
+
+            // Fondo
+            const grd = ctx.createLinearGradient(0, 0, 800, 600);
+            grd.addColorStop(0, '#FFF8DC');
+            grd.addColorStop(1, '#F0E68C');
+            ctx.fillStyle = grd;
+            ctx.fillRect(0, 0, 800, 600);
+
+            // Título
+            ctx.fillStyle = '#8B4513';
+            ctx.font = 'bold 48px Georgia';
+            ctx.textAlign = 'center';
+            ctx.fillText('Certificado de Evaluación', 400, 100);
+            
+            ctx.font = '32px Georgia';
+            ctx.fillText('Filosofía Antigua', 400, 150);
+
+            // Línea decorativa
+            ctx.strokeStyle = '#8B4513';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(100, 180);
+            ctx.lineTo(700, 180);
+            ctx.stroke();
+
+            // Datos del estudiante
+            ctx.fillStyle = '#5D4E37';
+            ctx.font = '28px Georgia';
+            ctx.textAlign = 'left';
+            ctx.fillText(`Estudiante: ${nombre} ${apellido}`, 100, 250);
+            ctx.fillText(`Carrera/Instrumento: ${carrera}`, 100, 300);
+
+            // Resultado
+            ctx.fillStyle = '#8B4513';
+            ctx.font = 'bold 72px Georgia';
+            ctx.textAlign = 'center';
+            ctx.fillText('Calificación Obtenida', 400, 420);
+            
+            ctx.fillStyle = '#B8860B';
+            ctx.font = 'bold 90px Georgia';
+            ctx.fillText(`${score}/15`, 400, 520);
+
+            // Descargar imagen
+            const link = document.createElement('a');
+            link.download = `Certificado_Antigua_${apellido}_${nombre}.png`;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+
+        buildQuiz();
+        submitBtn.addEventListener('click', showResults);
+        downloadBtn.addEventListener('click', downloadResultImage);
+    </script>
+</body>
+</html>
